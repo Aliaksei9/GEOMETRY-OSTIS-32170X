@@ -5,6 +5,7 @@ import Theme1 from './pages/theory-tests-problems/seventh-grade/theory/theme1/th
 import SeventhGradeTTP from './pages/theory-tests-problems/seventh-grade/seventh-grade';
 
 import UnknownProblemsChat from './pages/theory-tests-problems/seventh-grade/problems/UnknownProblemsChat';
+import DynamicTest from './pages/theory-tests-problems/seventh-grade/theory/DynamicTest';
 
 import Profile from './pages/profile/profile';
 import Authorization from './pages/authorization/authorization';
@@ -51,6 +52,7 @@ function App() {
             <Route path='/help' element={<Help />} />
             <Route path='/settings' element={<Settings />} />
             <Route path="/unknown-problems-chat" element={<UnknownProblemsChat />} />
+            <Route path="/test/dynamic" element={<DynamicTest />} />
             <Route path='/seven-grade-tests-theory-problems'>
               <Route path='' element={<SeventhGradeTTP />} />
               <Route path='test1' element={<Test1 />} />
