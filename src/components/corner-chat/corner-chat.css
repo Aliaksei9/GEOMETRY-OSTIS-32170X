@@ -1,0 +1,24 @@
+.corner-chat-button {
+    position: fixed;          /* лучше fixed, чем absolute — чтобы всегда был в углу экрана */
+    bottom: 1.5vh;            /* чуть выше, чтобы не прилипать к самому краю */
+    right: 0.8vw;             /* чуть левее от края */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 62px;             /* фиксированный размер — красивее, чем vh */
+    width: 62px;
+    border-radius: 18px;      /* чуть скруглённее */
+    background: linear-gradient(135deg, #6F60C1); /* глубокий тёмно-фиолетовый градиент */
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Эффект при наведении — кнопка "выпрыгивает" */
+.corner-chat-button:hover {
+    transform: translateY(-6px) scale(1.08);
+    box-shadow: 0 14px 28px rgba(111, 96, 193, 0.5),
+                0 8px 16px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #7B6CD8 0%, #6F60C1 100%);
+}

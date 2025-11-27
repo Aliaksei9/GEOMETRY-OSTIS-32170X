@@ -1,0 +1,150 @@
+.authorization-page {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #E8F5FF 0%, #D6E8FF 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: hidden;
+}
+
+/* Название приложения сверху */
+.app-title {
+    font-size: 52px;
+    font-weight: 800;
+    color: #1E2A6B;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* Логотип */
+.auth-logo {
+    width: 240px;
+    height: auto;
+    margin-bottom: 32px;
+    filter: drop-shadow(0 8px 20px rgba(111, 96, 193, 0.25));
+    transition: transform 0.4s ease;
+}
+.auth-logo:hover {
+    transform: scale(1.06);
+}
+
+/* Белый блок */
+.authorization-box {
+    width: 440px;
+    max-width: 92vw;
+    background: #FFFFFF;
+    border-radius: 28px;
+    padding: 52px 44px 44px;
+    box-shadow: 
+        0 24px 50px rgba(111, 96, 193, 0.22),
+        0 10px 24px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(132, 183, 238, 0.25);
+    animation: appear 0.7s ease-out;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Заголовок Log In / Sign Up — один чистый цвет */
+.authorization-title {
+    font-size: 40px !important;
+    font-weight: 700 !important;
+    color: #1E2A6B !important;        /* ← один тёмно-синий, без градиента */
+    text-align: center;
+    margin-bottom: 8px !important;
+}
+
+/* Подзаголовок */
+.auth-subtitle {
+    text-align: center;
+    font-size: 17px;
+    color: #5C6BC0;
+    margin-bottom: 36px;
+}
+.auth-link {
+    color: #2F90F8;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.auth-link:hover {
+    color: #1E69F5;
+}
+
+/* Поля ввода — одинаковые, ровные, чистые */
+.authorization-input {
+    height: 60px !important;
+    border-radius: 18px !important;
+    border: 2.5px solid #84B7EE !important;
+    background-color: #FFFFFF !important;
+    font-size: 18px !important;
+    padding: 0 22px !important;
+    transition: all 0.3s ease;
+}
+.authorization-input:focus,
+.authorization-input:hover {
+    border-color: #2F90F8 !important;
+    box-shadow: 0 0 0 5px rgba(47, 144, 248, 0.18) !important;
+    background-color: #FFFFFF !important;
+}
+
+/* Кнопка — один чистый цвет */
+.auth-submit-button {
+    width: 100%;
+    height: 60px;
+    border-radius: 18px;
+    background-color: #6F60C1 !important;     /* ← один тёмно-фиолетовый */
+    border: none !important;
+    font-size: 19px;
+    font-weight: 600;
+    color: white !important;
+    margin-top: 20px;
+    box-shadow: 0 10px 24px rgba(111, 96, 193, 0.35);
+    transition: all 0.3s ease;
+}
+.auth-submit-button:hover {
+    background-color: #5A4EA8 !important;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(111, 96, 193, 0.45);
+}
+
+/* УБИРАЕМ ДВОЙНЫЕ РАМКИ В ПОЛЕ ПАРОЛЯ — это главное! */
+.authorization-input.ant-input-password {
+    padding-right: 50px !important;     /* место под иконку глаза */
+}
+
+.authorization-input.ant-input-password .ant-input {
+    border: none !important;
+    background: transparent !important;
+    height: 100% !important;
+    padding: 0 !important;
+    font-size: 18px !important;
+}
+
+/* Иконка глаза — без лишних рамок */
+.authorization-input.ant-input-password .ant-input-password-icon {
+    color: #84B7EE;
+    font-size: 20px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 2.5px solid #84B7EE !important;
+    border-radius: 0 18px 18px 0 !important;
+    background: #F8FBFF;
+    margin-left: auto;
+    transition: all 0.3s ease;
+}
+
+.authorization-input.ant-input-password:hover .ant-input-password-icon,
+.authorization-input.ant-input-password:focus-within .ant-input-password-icon {
+    color: #2F90F8;
+    border-left-color: #2F90F8 !important;
+    background: #FFFFFF;
+}

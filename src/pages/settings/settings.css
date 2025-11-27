@@ -1,0 +1,161 @@
+/* Основной белый блок настроек — как в профиле и теории */
+.settings-main {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0px;
+    background: #FFFFFF;
+    border: 2px solid #6F60C1;
+    border-radius: 28px;
+    padding: 48px;
+    box-shadow: 0 16px 48px rgba(111, 96, 193, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+/* Заголовки секций */
+.settings-section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1E2A6B;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #E3F2FD;
+}
+
+/* Блок оповещений */
+.notifications-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px dashed #BBDEFB;
+    transition: background 0.2s ease;
+}
+
+.notifications-item:hover {
+    background-color: #F8FBFF;
+    border-radius: 16px;
+    padding: 20px 16px;
+    margin: 0 -16px;
+}
+
+.notifications-text {
+    font-size: 20px;
+    color: #1E2A6B;
+    font-weight: 500;
+}
+
+.email-input-wrapper {
+    width: 420px;
+}
+
+.email-input-wrapper .ant-input {
+    height: 56px;
+    border-radius: 16px;
+    border: 2.5px solid #84B7EE;
+    background-color: #FFFFFF;
+    font-size: 18px;
+    padding: 0 20px;
+    transition: all 0.3s ease;
+}
+
+.email-input-wrapper .ant-input:focus,
+.email-input-wrapper .ant-input:hover {
+    border-color: #2F90F8;
+    box-shadow: 0 0 0 4px rgba(47, 144, 248, 0.15);
+}
+
+/* Форма смены пароля */
+.password-form .ant-form-item {
+    margin-bottom: 28px;
+}
+
+.password-form .ant-input-password {
+    height: 56px;
+    border-radius: 16px;
+    border: 2.5px solid #84B7EE;
+    background-color: #FFFFFF;
+    font-size: 18px;
+}
+
+.password-form .ant-input-password:focus,
+.password-form .ant-input-password:hover {
+    border-color: #2F90F8;
+    box-shadow: 0 0 0 4px rgba(47, 144, 248, 0.15);
+}
+
+.password-form .ant-form-item-label > label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1E2A6B;
+}
+
+/* Кнопка "Изменить пароль" */
+.change-password-btn {
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #F46D78, #E53E3E);
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    padding: 0 32px;
+    box-shadow: 0 8px 20px rgba(244, 109, 120, 0.35);
+    transition: all 0.3s ease;
+}
+
+.change-password-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(244, 109, 120, 0.45);
+    background: linear-gradient(135deg, #f85865, #d32f2f);
+}
+
+/* ──────────────────────── ИСПРАВЛЕНИЕ "БЛОК В БЛОКЕ" ДЛЯ ПАРОЛЯ ──────────────────────── */
+.settings-main .ant-input-password {
+    height: 56px !important;
+    border-radius: 16px !important;
+    border: 2.5px solid #84B7EE !important;
+    background-color: #FFFFFF !important;
+    padding: 4px 20px 4px 20px !important;
+    transition: all 0.3s ease;
+}
+
+/* Убираем внутренний инпут Ant Design и его рамку */
+.settings-main .ant-input-password .ant-input {
+    height: 100% !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    font-size: 18px !important;
+    outline: none;
+}
+
+/* Иконка глаза — красиво и без лишних рамок */
+.settings-main .ant-input-password-icon {
+    color: #84B7EE;
+    font-size: 20px;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8FBFF;
+    border-left: 2.5px solid #84B7EE;
+    border-radius: 0 16px 16px 0 !important;
+    margin-left: 12px;
+    transition: all 0.3s ease;
+}
+
+/* Hover + Focus состояние */
+.settings-main .ant-input-password:hover,
+.settings-main .ant-input-password:focus-within {
+    border-color: #2F90F8 !important;
+    box-shadow: 0 0 0 4px rgba(47, 144, 248, 0.15) !important;
+}
+
+.settings-main .ant-input-password:hover .ant-input-password-icon,
+.settings-main .ant-input-password:focus-within .ant-input-password-icon {
+    color: #2F90F8;
+    border-left-color: #2F90F8;
+    background: #FFFFFF;
+}

@@ -1,0 +1,106 @@
+/* Фиксированный левый сайдбар — как в теории */
+.sidebar-navigation {
+    position: fixed;
+    left: 20px;
+    top: calc(7.5% + 20px);     /* ниже хедера */
+    width: 300px;
+    background: #D6E8FF;
+    border: 2.5px solid #84B7EE;
+    border-radius: 20px;
+    padding: 24px;
+    z-index: 10;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(111, 96, 193, 0.25);
+    font-family: 'Inter', sans-serif;
+    backdrop-filter: blur(8px);
+}
+
+/* Стили ссылок в сайдбаре */
+.sidebar-navigation .ant-anchor-link-title {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: #1E2A6B !important;
+    padding: 10px 14px !important;
+    border-radius: 14px !important;
+    transition: all 0.25s ease;
+    display: block;
+}
+
+.sidebar-navigation .ant-anchor-link-active > .ant-anchor-link-title {
+    background: #6F60C1 !important;
+    color: white !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(111, 96, 193, 0.4);
+}
+
+/* Главный контейнер — отступает от левого сайдбара */
+.help-page-container {
+    margin-left: 340px;           /* 300px ширина + 40px отступ */
+    margin-right: 20px;
+    padding: 20px 0;
+    min-height: calc(100vh - 120px);
+}
+
+/* Основной белый блок — как в теории, но красивее */
+.help-main-block {
+    background: #FFFFFF;
+    border: 2.5px solid #6F60C1;
+    border-radius: 24px;
+    padding: 40px 48px;
+    box-shadow: 0 16px 48px rgba(111, 96, 193, 0.22);
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100%;
+}
+
+/* Заголовок страницы */
+.help-header {
+    font-size: 40px;
+    font-weight: 800;
+    color: #1E2A6B;
+    margin-bottom: 40px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #E3F2FD;
+}
+
+/* Разделы и текст */
+.help-section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1E3A6B;
+    margin: 48px 0 24px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #84B7EE;
+}
+
+.theory-paragraph {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #1E2A6B;
+    margin-bottom: 24px;
+    text-align: justify;
+}
+
+.theory-paragraph strong {
+    color: #6F60C1;
+    font-weight: 700;
+}
+
+/* Скроллбар внутри контента */
+.help-content-scroll {
+    padding-right: 8px;
+}
+
+.help-content-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.help-content-scroll::-webkit-scrollbar-thumb {
+    background: #84B7EE;
+    border-radius: 4px;
+}
+
+.help-content-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}

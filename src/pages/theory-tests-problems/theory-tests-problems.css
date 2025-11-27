@@ -1,0 +1,279 @@
+.theory-tests-problems-main {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #C8E4FF;
+    margin: 0.7% auto 0 auto;
+    width: 100%;
+    max-width: 1700px;
+    height: calc(100% - 6%);
+    border: 2px solid #6F60C1;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.content-header {
+    font-size: 40px;
+    color: #4C3D8A; /* Тёмно-синий для заголовка */
+    text-transform: uppercase;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.theory-tests-problems-tabs-content {
+    width: 67vw;
+    min-width: 600px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border: 1px solid #84B7EE;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    padding: 0 10px;
+}
+
+.theory-tests-problems-tabs-content .plain-text {
+    color: #4C3D8A;
+    font-size: 22px;
+}
+
+.theory-tests-problems-tabs-content .button {
+    width: 150px;
+    height: 36px;
+    border-radius: 8px;
+    border: 2px solid #2F90F8 !important;
+    background-color: #ECF7FF !important;
+    color: #1E3A8A !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.theory-tests-problems-tabs-content .button:hover {
+    transform: translateY(-2px);
+    background-color: #ECF7FF !important;
+    border: 2px solid #2F90F8 !important;
+    color: #1E3A8A !important;
+}
+
+.theory-tests-problems-tabs-content .success-button {
+    width: 150px;
+    height: 36px;
+    border-radius: 8px;
+    border: 2px solid #52C41A !important;
+    background-color: #F6FFED !important;
+    color: #389E0D !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.theory-tests-problems-tabs-content .success-button:hover {
+    transform: translateY(-2px);
+    background-color: #F6FFED !important;
+    border: 2px solid #52C41A !important;
+    color: #389E0D !important;
+}
+
+.theory-block-box {
+    width: calc(100% - 40px);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 12px;
+    font-size: 18px;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease;
+}
+
+.theory-block-box:hover {
+    transform: translateY(-2px);
+}
+
+/* Определение — синий акцент */
+.theory-definition {
+    background: #E3F2FD;
+    border-left: 6px solid #1E88E5;
+    color: #1565C0;           /* тёмно-синий текст */
+    font-weight: 600;
+}
+
+/* Теорема — зелёный акцент */
+.theory-theorem {
+    background: #E8F5E8;
+    border-left: 6px solid #43A047;
+    color: #2E7D32;           /* тёмно-зелёный */
+    font-weight: 600;
+}
+
+/* Доказательство — фиолетовый акцент */
+.theory-proof {
+    background: #F3E5F5;
+    border-left: 6px solid #8E24AA;
+    color: #6A1B9A;           /* насыщенный фиолетовый */
+    font-style: italic;
+}
+
+/* Аксиома — оранжевый акцент */
+.theory-axiom {
+    background: #FFF3E0;
+    border-left: 6px solid #FB8C00;
+    color: #EF6C00;           /* яркий оранжевый */
+    font-weight: 600;
+}
+.theory-block-box .ant-typography {
+    font-size: 18px !important;
+    line-height: 1.6 !important;
+}
+
+/* ФОРСИРУЕМ ТЁМНО-СИНИЙ ЦВЕТ ВО ВСЕХ БЛОКАХ ТЕОРИИ — НЕВАЖНО, ЧТО ТАМ БЫЛО РАНЬШЕ */
+.theory-definition,
+.theory-theorem,
+.theory-proof,
+.theory-axiom,
+.theory-block-box,
+.theory-block-box * {
+    color: #1E2A6B !important;   /* ← тот же цвет, что и в .theory-paragraph */
+    font-weight: normal !important;
+    font-style: normal !important;
+}
+
+/* Дополнительно — на случай, если Ant Design внутри блока переопределяет цвет */
+.theory-block-box .ant-typography,
+.theory-block-box .ant-typography * {
+    color: #1E2A6B !important;
+}
+
+/* === ЕДИНЫЙ ЦВЕТ, РАЗМЕР И ШРИФТ ДЛЯ ВСЕГО ТЕКСТА В ТЕСТЕ === */
+.test-question-box,
+.test-question-box *,
+.test-question-item,
+.question-text,
+.ant-radio-wrapper,
+.ant-checkbox-wrapper,
+.ant-form-item-label > label,
+.ant-input,
+.ant-input:focus {
+    color: #1E2A6B !important;           /* ← твой основной тёмно-синий из теории */
+    font-size: 20px !important;          /* ← увеличил с 18 до 20px — идеально читаемо */
+    line-height: 1.6 !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-weight: 500 !important;
+}
+
+/* Заголовки вопросов — чуть крупнее и жирнее */
+.question-text {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #1E2A6B !important;
+    margin-bottom: 16px !important;
+}
+
+/* Блок с вопросом — чуть мягче и современнее */
+.test-question-box {
+    background-color: #F8FBFF;
+    border: 2px solid #84B7EE;
+    border-radius: 20px;
+    padding: 24px;
+    margin: 24px 10px;
+    box-shadow: 0 4px 16px rgba(132, 183, 238, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.test-question-box:hover {
+    transform: translateY(-2px);
+}
+
+/* Варианты ответа — чистые, аккуратные, единый стиль */
+.test-question-item,
+.ant-radio-wrapper,
+.ant-checkbox-wrapper {
+    background-color: #FFFFFF !important;
+    border: 1.5px solid #84B7EE !important;
+    border-radius: 14px !important;
+    padding: 14px 18px !important;
+    margin: 10px 0 !important;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+/* При наведении */
+.test-question-item:hover,
+.ant-radio-wrapper:hover,
+.ant-checkbox-wrapper:hover {
+    background-color: #ECF7FF !important;
+    border-color: #2F90F8 !important;
+    box-shadow: 0 4px 12px rgba(47, 144, 248, 0.15) !important;
+}
+
+/* При выборе — выделение */
+.test-question-item.ant-radio-wrapper-checked,
+.ant-radio-wrapper-checked,
+.ant-checkbox-wrapper-checked {
+    background-color: #D6E8FF !important;
+    border-color: #6F60C1 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 14px rgba(111, 96, 193, 0.2) !important;
+}
+
+/* Текстовое поле */
+.ant-input,
+.ant-input:focus {
+    border-radius: 12px !important;
+    border: 1.5px solid #84B7EE !important;
+    font-size: 20px !important;
+    padding: 12px 16px !important;
+}
+
+.ant-input:focus {
+    border-color: #2F90F8 !important;
+    box-shadow: 0 0 0 3px rgba(47, 144, 248, 0.15) !important;
+}
+/* Стили для навигационной панели */
+.navigation-panel {
+
+    border-right: none !important;
+
+}
+
+/* Стили для Anchor */
+.ant-anchor {
+    background-color: transparent !important;
+}
+
+/* БОКОВАЯ ПАНЕЛЬ — ЗАКРУГЛЁННАЯ */
+.sidebar-navigation {
+    background-color: #D6E8FF !important; /* светлее основного фона */
+    border: 2px solid #84B7EE !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.ant-anchor-link-title {
+    color: #1E40AF !important;
+    font-size: 18px !important;
+
+}
+
+.ant-anchor-link-active > .ant-anchor-link-title {
+    color: #6F60C1 !important;
+
+}
+
+/* Стили для параграфов теории */
+.theory-paragraph {
+    font-size: 18px !important;
+    color: #1E2A6B !important; /* Тёмно-синий */
+    line-height: 1.6 !important;
+}

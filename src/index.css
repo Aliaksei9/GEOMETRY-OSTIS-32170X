@@ -1,0 +1,68 @@
+
+/* === ШРИФТ INTER === 
+@font-face {
+  font-family: 'Inter';
+  src: url('/home/adliga/Geometry/OSTIS-geometry-test/src/media/Inter-Bold.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/home/adliga/Geometry/OSTIS-geometry-test/src/media/Inter-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}*/
+
+/* === ШРИФТ INTER === */
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/Inter-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* === ПРИНУДИТЕЛЬНО ПРИМЕНИТЬ === */
+*, *::before, *::after {
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* === ANT DESIGN СБРОС === */
+.ant-typography,
+.ant-btn,
+.ant-dropdown-menu-item,
+.ant-avatar,
+.ant-avatar-string {
+  font-family: 'Inter', sans-serif !important;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
