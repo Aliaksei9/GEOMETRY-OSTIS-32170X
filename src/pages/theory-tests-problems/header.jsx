@@ -11,7 +11,7 @@ const { Text } = Typography;
 function Header({ showBackButton = false, onBack }) {
     const navigate = useNavigate();
 
-    // ──────────────────────── КРАСИВЫЙ ПРОФИЛЬ-ДРОПДАУН (как на Home) ────────────────────────
+    // ──────────────────────────────── ПРОФИЛЬ ДРОПДАУН ────────────────────────────────
     const profileDropdownItems = [
         {
             key: 'header',
@@ -28,14 +28,11 @@ function Header({ showBackButton = false, onBack }) {
             disabled: true,
         },
         { type: 'divider' },
-
         { key: 'profile', label: 'Профиль', onClick: () => navigate('/profile') },
         { key: 'balance', label: 'Баланс остиков' },
         { key: 'settings', label: 'Настройки', onClick: () => navigate('/settings') },
         { key: 'help', label: 'Помощь', onClick: () => navigate('/help') },
-
         { type: 'divider' },
-
         {
             key: 'logout',
             label: <span className="profile-logout">Выйти</span>,

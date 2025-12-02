@@ -1,3 +1,72 @@
+/* === НОВАЯ ПРАВИЛЬНАЯ ПРОКРУТКА + СТАРЫЙ ДИЗАЙН === */
+html, body, #root {
+    height: 100%;
+    overflow: hidden !important;
+}
+
+.ttp-root-wrapper {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #E8F5FF; /* можно оставить лёгкий фон, как было */
+}
+
+.ttp-main-container {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 20px 40px; /* чуть больше по бокам, чтобы было как раньше */
+}
+
+.ttp-content-block {
+    background-color: #C8E4FF;           /* ← старый цвет! */
+    border: 2px solid #6F60C1;           /* ← старый бордер! */
+    border-radius: 15px;                 /* ← старое скругление! */
+    padding: 20px;                       /* ← старые отступы! */
+    width: 100%;
+    max-width: 1700px;
+    margin: 0.7% auto 0 auto;           /* ← как было! */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1;
+    box-shadow: none;                    /* убираем тень, как было раньше */
+}
+
+.content-header {
+    font-size: 40px;
+    color: #4C3D8A;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    /* убираем нижнюю линию и жирность, как было */
+}
+
+.ttp-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* Красивый скроллбар — оставляем */
+.ttp-scroll-area::-webkit-scrollbar {
+    width: 10px;
+}
+.ttp-scroll-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+.ttp-scroll-area::-webkit-scrollbar-thumb {
+    background: linear-gradient(#84B7EE, #6F60C1);
+    border-radius: 10px;
+}
+.ttp-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: #6F60C1;
+}
+
 .theory-tests-problems-main {
     overflow-y: scroll;
     overflow-x: hidden;

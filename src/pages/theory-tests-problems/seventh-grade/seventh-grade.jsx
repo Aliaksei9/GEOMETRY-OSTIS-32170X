@@ -4,9 +4,10 @@ import { UserOutlined } from '@ant-design/icons';
 import { theory, tests, problems } from './seventh-grade-data';
 import { useNavigate } from 'react-router';
 import ChatButton from '../../../components/corner-chat/corner-chat-button';
+import UnknownProblemsButton from './problems/UnknownProblemsButton'; // ← импортируем сюда!
 import Logo from '../../../media/og.png';
 import '../../../index.css';
-import '../../../pages/home/home.css'; // ← сюда уже включены стили профиля
+import '../../../pages/home/home.css';
 import '../theory-tests-problems.css';
 
 const { Text } = Typography;
@@ -15,7 +16,7 @@ function SeventhGradeTTP() {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('theory');
 
-    // ──────────────────────── КРАСИВЫЙ ПРОФИЛЬ-ДРОПДАУН (ОДИН НА ВСЁ ПРИЛОЖЕНИЕ) ────────────────────────
+    // ──────────────────────────────── ПРОФИЛЬ ДРОПДАУН ────────────────────────────────
     const profileDropdownItems = [
         {
             key: 'header',
@@ -51,11 +52,10 @@ function SeventhGradeTTP() {
         'ВЫБЕРИТЕ ЗАДАЧУ';
 
     return (
-        <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', overflowX: 'hidden' }}>
+        <div className="ttp-root-wrapper">
             {/* ====================== ХЕДЕР ====================== */}
             <div id="home-header" style={{ paddingLeft: '20px' }}>
                 <div className="header-half">
-                    {/* Логотип — кнопка на главную */}
                     <Button
                         className="button header-button header-logo-button"
                         onClick={() => navigate('/home')}
@@ -67,81 +67,93 @@ function SeventhGradeTTP() {
                             justifyContent: 'center',
                         }}
                     >
-                        <img
-                            src={Logo}
-                            alt="OSTIS-geometry logo"
-                            style={{ height: '60%', width: 'auto', pointerEvents: 'none' }}
-                        />
+                        <img src={Logo} alt="OSTIS-geometry logo" style={{ height: '60%', width: 'auto' }} />
                     </Button>
 
-                    {/* Вкладки: Теория / Тесты / Задачи */}
                     <Button
                         className={`button header-button ${activeTab === 'theory' ? 'active' : ''}`}
                         onClick={() => setActiveTab('theory')}
-                        data-tab="theory"   // ← добавь это
+                        data-tab="theory" 
                     >
                         <span className="header-button-text">Теория</span>
                     </Button>
                     <Button
                         className={`button header-button ${activeTab === 'tests' ? 'active' : ''}`}
                         onClick={() => setActiveTab('tests')}
-                        data-tab="tests"    // ← добавь это
+                        data-tab="tests"
                     >
                         <span className="header-button-text">Тесты</span>
                     </Button>
                     <Button
                         className={`button header-button ${activeTab === 'problems' ? 'active' : ''}`}
                         onClick={() => setActiveTab('problems')}
-                        data-tab="problems" // ← добавь это
+                        data-tab="problems" 
                     >
                         <span className="header-button-text">Задачи</span>
                     </Button>
                 </div>
 
-                {/* ====================== АВАТАР + КРАСИВЫЙ ПРОФИЛЬ ====================== */}
-                <div className="header-half" style={{ flexDirection: 'row-reverse', marginRight: '40px' }}>
-                    <Dropdown
-                        menu={{ items: profileDropdownItems }}
-                        placement="bottomRight"
-                        trigger={['click']}
-                        overlayClassName="home-profile-dropdown"
-                        dropdownRender={(menu) => (
-                            <div style={{ borderRadius: '20px', overflow: 'hidden' }}>
-                                {React.cloneElement(menu)}
-                            </div>
-                        )}
-                    >
-                        <Avatar
-                            icon={<UserOutlined />}
-                            size={68}
-                            style={{
-                                cursor: 'pointer',
-                                backgroundColor: 'white',
-                                border: '3px solid #6F60C1',
-                                color: '#6F60C1',
-                                boxShadow: '0 0 12px rgba(111, 96, 193, 0.35)',
-                                transition: 'all 0.3s ease',
-                            }}
-                            onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
-                            onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                        />
-                    </Dropdown>
-                </div>
+            {/* ──────────────────────── АВАТАР + КРАСИВЫЙ ПРОФИЛЬ ──────────────────────── */}
+            <div className="header-half" style={{ flexDirection: 'row-reverse', marginRight: '40px' }}>
+                <Dropdown
+                    menu={{ items: profileDropdownItems }}
+                    placement="bottomRight"
+                    trigger={['click']}
+                    overlayClassName="home-profile-dropdown"  // ← используем тот же класс, что и на главной
+                    dropdownRender={(menu) => (
+                        <div style={{ borderRadius: '20px', overflow: 'hidden' }}>
+                            {React.cloneElement(menu)}
+                        </div>
+                    )}
+                >
+                    <Avatar
+                        icon={<UserOutlined />}
+                        size={68}
+                        style={{
+                            cursor: 'pointer',
+                            backgroundColor: 'white',
+                            border: '3px solid #6F60C1',
+                            color: '#6F60C1',
+                            boxShadow: '0 0 12px rgba(111, 96, 193, 0.35)',
+                            transition: 'all 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                    />
+                </Dropdown>
             </div>
+        </div>
 
-            {/* ====================== КОНТЕНТ ====================== */}
-            <div className="theory-tests-problems-main middle-column">
-                <Text className="content-header" strong>
-                    {headerText}
-                </Text>
+            {/* ====================== ЦЕНТРАЛЬНЫЙ БЛОК ====================== */}
+            <div className="ttp-main-container">
+                <div className="ttp-content-block">
+                    {/* Заголовок */}
+                    <Text className="content-header" strong>
+                        {headerText}
+                    </Text>
 
-                {content.length > 0 ? (
-                    content.map((item, index) => (
-                        <div key={item.key || `item-${index}`}>{item}</div>
-                    ))
-                ) : (
-                    <Text style={{ color: '#999', fontSize: 18 }}>Нет доступного контента</Text>
-                )}
+                    {/* Кнопка "Решение неизвестных задач" — всегда сверху, не скроллится */}
+                    {activeTab === 'problems' && (
+                        <div style={{ textAlign: 'center' }}>
+                            <UnknownProblemsButton />
+                        </div>
+                    )}
+
+                    {/* Только этот блок скроллится */}
+                    <div className="ttp-scroll-area">
+                        {content.length > 0 ? (
+                            content.map((item, index) => (
+                                <div key={item.key || `item-${index}`}>
+                                    {item}
+                                </div>
+                            ))
+                        ) : (
+                            <Text style={{ color: '#999', fontSize: 18, textAlign: 'center', marginTop: '60px' }}>
+                                Нет доступного контента
+                            </Text>
+                        )}
+                    </div>
+                </div>
             </div>
 
             <ChatButton />

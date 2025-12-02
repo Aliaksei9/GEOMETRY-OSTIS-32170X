@@ -1,10 +1,8 @@
 // src/pages/seventh-grade/seventh-grade-data.jsx
-
 import React from 'react';
 import { TTPTabContent } from '../theory-tests-problems';
-import { Button } from 'antd';
 import UnknownProblemsButton from './problems/UnknownProblemsButton';
-import TopicWithTestButton from './theory/TopicWithTestButton'; // ← добавлен импорт
+import TopicWithTestButton from './theory/TopicWithTestButton';
 
 // ==================== ТЕОРИЯ ====================
 export const theory = [
@@ -26,8 +24,9 @@ export const theory = [
         studyPath="theme3"
         testTopic="Треугольники"
     />,
-    // Добавляй новые темы точно так же
+    // Добавляй новые темы сюда
 ];
+
 // ==================== ТЕСТЫ ====================
 export const tests = [
     <TTPTabContent key="test-1" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Сдать" grade="*" path="test1" />,
@@ -37,9 +36,8 @@ export const tests = [
 ];
 
 // ==================== ЗАДАЧИ ====================
+// УБИРАЕМ UnknownProblemsButton отсюда — он больше не должен быть в списке!
 export const problems = [
-    <UnknownProblemsButton key="unknown-problems-button" />,
-
     <TTPTabContent key="problem-1" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
     <TTPTabContent key="problem-2" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
     <TTPTabContent key="problem-3" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
@@ -61,4 +59,5 @@ export const problems = [
     <TTPTabContent key="problem-19" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
     <TTPTabContent key="problem-20" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
     <TTPTabContent key="problem-21" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
+    // ← остальные задачи
 ];

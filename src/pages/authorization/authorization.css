@@ -51,22 +51,34 @@
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Заголовок Log In / Sign Up — один чистый цвет */
+/* 1. Заголовок "Войти" / "Регистрация" — по центру */
 .authorization-title {
     font-size: 40px !important;
     font-weight: 700 !important;
-    color: #1E2A6B !important;        /* ← один тёмно-синий, без градиента */
-    text-align: center;
+    color: #1E2A6B !important;
+    text-align: center !important;        /* ← было убрано или перезаписано */
     margin-bottom: 8px !important;
+    display: block !important;            /* ← обязательно, чтобы text-align работал */
 }
 
-/* Подзаголовок */
+/* 2. Подзаголовок ("Нет аккаунта? ...") — уже по центру, но на всякий случай */
 .auth-subtitle {
     text-align: center;
     font-size: 17px;
     color: #5C6BC0;
     margin-bottom: 36px;
 }
+
+/* 3. Блок "Запомнить меня" — полностью по центру карточки */
+.auth-remember-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;   /* ← вот это центрирует по горизонтали */
+    gap: 12px;
+
+
+}
+
 .auth-link {
     color: #2F90F8;
     font-weight: 600;

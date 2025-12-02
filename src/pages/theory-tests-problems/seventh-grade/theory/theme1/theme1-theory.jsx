@@ -3,10 +3,10 @@ import { Typography, Anchor } from 'antd';
 import { useNavigate } from 'react-router';
 import ChatButton from '../../../../../components/corner-chat/corner-chat-button';
 import Header from '../../../header';
-
 import '../../../theory-tests-problems.css';
 import pic1 from './pic1.png';
 import { TheoryDTPABlock } from '../../../theory-tests-problems';
+
 const { Text, Paragraph } = Typography;
 
 const navigationMenuItems = [
@@ -15,88 +15,101 @@ const navigationMenuItems = [
         title: 'I. Прямая, луч, отрезок.',
         href: '#прямая-луч-отрезок',
         children: [
-            {
-                key: '1',
-                title: 'a. Прямая',
-                href: '#прямая',
-            },
-            {
-                key: '2',
-                title: 'б. Луч',
-                href: '#луч',
-            },
-            {
-                key: '3',
-                title: 'в. Отрезок',
-                href: '#отрезок',
-            },
+            { key: '1', title: 'a. Прямая', href: '#прямая' },
+            { key: '2', title: 'б. Луч', href: '#луч' },
+            { key: '3', title: 'в. Отрезок', href: '#отрезок' },
         ],
     },
-    {
-        key: '4',
-        title: 'II. Ломаная и её типы',
-        href: '#ломаная-и-типы',
-    },
+    { key: '4', title: 'II. Ломаная и её типы', href: '#ломаная-и-типы' },
 ];
 
 function Theme1() {
-    const anchorTargetContainer = useRef(null);
     const navigate = useNavigate();
+    const scrollRef = useRef(null);
 
     return (
-        <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', overflowX: 'hidden' }}>
+        <div className="ttp-root-wrapper">
             <Header showBackButton={true} />
-            <div className='sidebar-navigation' style={{
-                position: 'fixed',
-                left: '20px',
-                top: 'calc(7.5% + 20px)',  // ниже хедера + отступ
-                width: '280px',
-                backgroundColor: '#D6E8FF',  // чуть светлее #C8E4FF
-                border: '2px solid #84B7EE',
-                borderRadius: '15px',
-                padding: '15px',
-                overflowY: 'auto',
-                zIndex: 10,
-                maxHeight: 'calc(100% - 9%)',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            }}>
+
+            {/* Боковая панель — без изменений */}
+            <div
+                className="sidebar-navigation"
+                style={{
+                    position: 'fixed',
+                    left: '20px',
+                    top: 'calc(7.5% + 20px)',
+                    width: '280px',
+                    backgroundColor: '#D6E8FF',
+                    border: '2px solid #84B7EE',
+                    borderRadius: '15px',
+                    padding: '15px',
+                    overflowY: 'auto',
+                    zIndex: 10,
+                    maxHeight: 'calc(100vh - 9%)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                }}
+            >
                 <Anchor
                     affix={false}
                     items={navigationMenuItems}
-                    getContainer={() => anchorTargetContainer.current}
+                    getContainer={() => scrollRef.current || window}
                 />
             </div>
+
+            {/* Центральная часть — ТОЧНО как у тебя было */}
             <div style={{
                 width: '100%',
                 display: 'flex',
                 justifyContent: 'center',
                 paddingTop: '0px',
             }}>
-                <div className='theory-tests-problems-main' style={{
-                    width: '100%',
-                    maxWidth: '1600px',  // ограничили ширину
-                    backgroundColor: '#C8E4FF',
-                    border: '2px solid #6F60C1',
-                    borderRadius: '15px',
-                    padding: '20px',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-                }}>
-                    <div className='theory-tests-problems-header' style={{ borderBottom: '1px solid #84B7EE' }}>
-                        <Text strong className='header-text' style={{ fontSize: '40px', marginLeft: '15px', color: '#1E3A8A' }}>
+                <div
+                    className="theory-tests-problems-main"
+                    style={{
+                        width: '100%',
+                        maxWidth: '1600px',
+                        backgroundColor: '#C8E4FF',
+                        border: '2px solid #6F60C1',
+                        borderRadius: '15px',
+                        padding: '20px',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+
+                        /* КЛЮЧЕВЫЕ ИСПРАВЛЕНИЯ — теперь блок НЕ ВЫЛЕЗЕТ за экран */
+                        height: '1330px',   // 100px ≈ высота хедера + отступы
+                        maxHeight: 'calc(100vh - 100px)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        overflow: 'hidden',              // убираем любой скролл у самого блока
+                        boxSizing: 'border-box',
+                    }}
+                >
+                    {/* Заголовок темы — фиксирован сверху */}
+                    <div style={{
+                        borderBottom: '1px solid #84B7EE',
+                        paddingBottom: '12px',
+                        marginBottom: '20px',
+                        flexShrink: 0,
+                        textAlign: 'center',
+                    }}>
+                        <Text strong style={{ fontSize: '40px', color: '#1E3A8A' }}>
                             1. Прямая, луч, отрезок. Ломаная
                         </Text>
                     </div>
-                    <div 
- 			ref={anchorTargetContainer} 
- 			style={{ 
-        		    width: '100%', 
-       		            maxWidth: '1400px',           // ограничиваем ширину контента
-       		            margin: '20px auto',          // ← ВВЕРХ/ВНИЗ 20px, по бокам — по центру!
-       			    padding: '0 20px',            // ← дополнительный отступ внутри, если нужно
-       			    boxSizing: 'border-box',
-    			}}
-		    >
-                        <Text strong className='subheader-text' style={{ fontSize: '28px', color: '#1E3A8A' }}>
+
+                    {/* ТОЛЬКО ЭТОТ DIV СКРОЛЛИТСЯ */}
+                    <div
+                        ref={scrollRef}
+                        className="ttp-scroll-area"
+                        style={{
+                            flex: 1,
+                            overflowY: 'auto',
+                            overflowX: 'hidden',
+                            paddingRight: '80px',  
+                            paddingLeft: '80px', // место под красивый скроллбар
+                        }}
+                    >
+                        {/* ← ВЕСЬ ТВОЙ КОНТЕНТ ТЕМЫ ЗДЕСЬ → */}
+                        <Text strong style={{ fontSize: '28px', color: '#1E3A8A', display: 'block', marginBottom: '20px' }}>
                             I. Прямая, луч, отрезок.
                         </Text>
                         <Paragraph id='прямая-луч-отрезок' ellipsis={{ defaultExpanded: true }} className='theory-paragraph'>

@@ -215,7 +215,7 @@ function Home() {
                         </Text>
                         <Paragraph
                             strong
-                            style={{ width: '140%', marginTop: '250px', fontSize: '40px', lineHeight: '60px', background: 'linear-gradient(90deg, #1E69F5 0%, #4FC3F7 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', textShadow: '0 0 15px rgba(30,105,245,0.6)', color: 'transparent', whiteSpace: 'pre-line' }}
+                            style={{ width: '140%', marginTop: '250px', fontSize: '40px', lineHeight: '60px', background: 'linear-gradient(90deg, #8C90E6 0%, #8C90E6 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', whiteSpace: 'pre-line' }}
                         >
                             {`Интеллектуальная диалоговая\nсистема помогает пользователю в\nизучении отдельных тем по\n геометрии, в рамках учебной\nпрограммы РБ по геометрии`}
                         </Paragraph>

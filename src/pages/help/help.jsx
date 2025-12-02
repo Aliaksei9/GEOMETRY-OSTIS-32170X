@@ -53,7 +53,7 @@ function Help() {
     const contentRef = useRef(null);
 
     return (
-        <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', overflowX: 'hidden' }}>
+        <div className="help-root-wrapper">
             {/* Верхняя панель */}
             <Header showBackButton={true} onBack={() => navigate(-1)} />
 
@@ -68,8 +68,8 @@ function Help() {
             </div>
 
             {/* Основной контент — как в теории */}
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
-                <div className="theory-tests-problems-main help-main-block">
+            <div className="help-page-container">
+    		<div className="help-main-block">
                     <div className="theory-tests-problems-header">
                         <Text strong style={{ fontSize: '40px', color: '#1E3A8A', marginLeft: '15px' }}>
                             Помощь и часто задаваемые вопросы

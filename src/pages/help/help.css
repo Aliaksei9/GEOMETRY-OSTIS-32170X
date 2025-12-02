@@ -1,8 +1,22 @@
+/* УБИРАЕМ ПРОКРУТКУ ВСЕЙ СТРАНИЦЫ НАВСЕГДА */
+html, body {
+    overflow: hidden !important;
+    height: 100% !important;
+}
+
+.help-root-wrapper {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;           /* ← главное */
+    display: flex;
+    flex-direction: column;
+}
+
 /* Фиксированный левый сайдбар — как в теории */
 .sidebar-navigation {
     position: fixed;
     left: 20px;
-    top: calc(7.5% + 20px);     /* ниже хедера */
+    top: 135px;     /* ниже хедера */
     width: 300px;
     background: #D6E8FF;
     border: 2.5px solid #84B7EE;
@@ -32,26 +46,6 @@
     color: white !important;
     font-weight: 700 !important;
     box-shadow: 0 4px 12px rgba(111, 96, 193, 0.4);
-}
-
-/* Главный контейнер — отступает от левого сайдбара */
-.help-page-container {
-    margin-left: 340px;           /* 300px ширина + 40px отступ */
-    margin-right: 20px;
-    padding: 20px 0;
-    min-height: calc(100vh - 120px);
-}
-
-/* Основной белый блок — как в теории, но красивее */
-.help-main-block {
-    background: #FFFFFF;
-    border: 2.5px solid #6F60C1;
-    border-radius: 24px;
-    padding: 40px 48px;
-    box-shadow: 0 16px 48px rgba(111, 96, 193, 0.22);
-    max-width: 1400px;
-    margin: 0 auto;
-    min-height: 100%;
 }
 
 /* Заголовок страницы */
@@ -87,20 +81,48 @@
     font-weight: 700;
 }
 
-/* Скроллбар внутри контента */
+/* Главный контейнер — теперь строго по высоте экрана */
+.help-page-container {
+    margin-left: 20px;        /* ← теперь слева и справа одинаково */
+    margin-right: 20px;
+    padding: 20px 0;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Белый блок — растягивается и обрезает переполнение */
+.help-main-block {
+    background: #FFFFFF;
+    border: 2.5px solid #6F60C1;
+    border-radius: 24px;
+    padding: 40px 48px;
+    box-shadow: 0 16px 48px rgba(111, 96, 193, 0.22);
+    max-width: 1400px;
+    margin: 0 auto;
+    flex: 1;                    /* ← главное: растягивается на всю высоту */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;           /* ← обрезаем всё, что выходит */
+}
+
+/* Только этот блок скроллится */
 .help-content-scroll {
-    padding-right: 8px;
+    flex: 1;                    /* ← занимает всё оставшееся место */
+    overflow-y: auto;           /* ← только здесь прокрутка */
+    padding-right: 12px;
+    margin-right: -12px;        /* компенсация padding */
 }
 
+/* Красивый скроллбар */
 .help-content-scroll::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
 }
-
-.help-content-scroll::-webkit-scrollbar-thumb {
-    background: #84B7EE;
-    border-radius: 4px;
-}
-
 .help-content-scroll::-webkit-scrollbar-track {
     background: transparent;
+}
+.help-content-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(#84B7EE, #6F60C1);
+    border-radius: 10px;
 }

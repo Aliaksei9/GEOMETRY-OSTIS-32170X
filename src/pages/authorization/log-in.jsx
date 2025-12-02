@@ -46,14 +46,18 @@ function LogIn() {
                 />
             </Form.Item>
 
-            <Form.Item style={{ marginBottom: 16 }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Form.Item name="remember" valuePropName="checked" noStyle>
-                        <Switch defaultChecked />
-                    </Form.Item>
-                    <Text style={{ color: '#5C6BC0', fontSize: 16 }}>Запомнить меня</Text>
-                </div>
-            </Form.Item>
+
+            
+            <Form.Item>
+    		<div className="auth-remember-wrapper">
+        	    <Form.Item name="remember" valuePropName="checked" noStyle>
+            		<Switch defaultChecked />
+        	    </Form.Item>
+            	    <Text style={{ color: '#5C6BC0', fontSize: 17, fontWeight: '600', margin: 0 }}>
+            Запомнить меня
+		    </Text>
+   	        </div>
+	    </Form.Item>
 
             <Form.Item style={{ margin: '24px 0 0' }}>
                 <Button
