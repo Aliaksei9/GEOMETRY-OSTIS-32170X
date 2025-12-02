@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start-frontend": "react-scripts start",
-    "start-backend": "python3 -m uvicorn src.backend.unknown_tasks:app --reload",
+    "start-backend": "python3 -m uvicorn src.backend.unknown_tasks.unknown_tasks:app --reload",
     "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
