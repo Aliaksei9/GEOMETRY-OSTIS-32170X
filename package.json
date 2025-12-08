@@ -15,7 +15,9 @@
   },
   "scripts": {
     "start-frontend": "react-scripts start",
-    "start-backend": "python3 -m uvicorn src.backend.unknown_tasks.unknown_tasks:app --reload",
+    "start-unknown-tasks": "python3 -m uvicorn src.backend.unknown_tasks.unknown_tasks:app --reload --port 8000",
+    "start-test-generator-api": "python3 -m uvicorn src.backend.test_generator_api.test_generator_api:app --reload --port 8001",
+    "start-backend": "concurrently \"npm run start-unknown-tasks\" \"npm run start-test-generator-api\"",
     "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
