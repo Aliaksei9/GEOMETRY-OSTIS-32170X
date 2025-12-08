@@ -1,5 +1,4 @@
 // src/pages/seventh-grade/theory/TopicWithTestButton.jsx
-
 import React from 'react';
 import { Typography, Button } from 'antd';
 import { useNavigate } from 'react-router';
@@ -22,7 +21,7 @@ const TopicWithTestButton = ({ title, studyPath, testTopic }) => {
 
             {/* Кнопки — в той же строке, как в тестах и задачах */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-                {/* Кнопка "Изучить" — обычная синяя */}
+                {/* Кнопка "Изучить"*/}
                 <Button
                     className="button"
                     style={{ marginRight: '10px' }}
@@ -31,7 +30,7 @@ const TopicWithTestButton = ({ title, studyPath, testTopic }) => {
                     Изучить
                 </Button>
 
-                {/* Кнопка "Тест" — фиолетовая, но в том же стиле */}
+                {/* Кнопка "Тест"*/}
                 <Button
                     type="primary"
                     style={{

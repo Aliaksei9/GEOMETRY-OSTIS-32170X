@@ -1,11 +1,12 @@
+/* Хедер */
 #home-header {
     width: 100%;
     height: 7.5%;
     display: flex;
     border-bottom: 2px solid #84B7EE;
-
 }
 
+/* Главный контент */
 #home-main {
     width: 100%;
     height: 100%;
@@ -14,6 +15,7 @@
     padding-left: 4%;
 }
 
+/* Выпадающее меню под кнопками */
 .home-dropdown-menu {
     background-color: #D7EEFF;
     border: 2px solid #84B7EE;
@@ -22,6 +24,7 @@
     align-items: center;
 }
 
+/* Две половины хедера */
 .header-half {
     height: 100%;
     width: 100%;
@@ -30,20 +33,22 @@
     gap: 20px;
 }
 
+/* Логотип в хедере */
 .header-logo {
-    height: 60px !important;     /* принудительно */
+    height: 60px !important;
     width: auto !important;
     object-fit: contain;
     margin: 20px;
 }
 
+/* Основные кнопки в хедере */
 .header-button {
     width: auto;
     height: 70%;
     margin: 0;
     padding: 0 30px;
     border-radius: 15px;
-    border: 2px solid #2F90F8 !important; /* Более контрастный синий для видимости */
+    border: 2px solid #2F90F8 !important;
     background-color: #ECF7FF !important;
     display: flex;
     align-items: center;
@@ -53,6 +58,7 @@
     transition: all 0.3s ease;
 }
 
+/* Hover и активное состояние кнопок */
 .header-button:hover,
 .header-button.active {
     background: linear-gradient(145deg, #FFFFFF, #F5F9FF) !important;
@@ -63,15 +69,15 @@
     transform: translateY(-4px);
 }
 
+/* Активная кнопка — ещё больше выделение */
 .header-button.active {
     border-color: #1E69F5 !important;
     box-shadow: 0 10px 30px rgba(30, 105, 245, 0.35) !important;
 }
 
-
+/* Градиентный текст в кнопках */
 .header-button-text {
     background: linear-gradient(90deg, #6F60C1 0%);
-/* background: linear-gradient(90deg, #6F60C1 0%, #2F90F8 100%);*/
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -80,7 +86,7 @@
     display: inline-block;
 }
 
-/* === ПРОФИЛЬ-ДРОПДАУН — НОВЫЙ СТИЛЬ === */
+/* Профиль-дропдаун — новый стиль */
 .home-profile-dropdown .ant-dropdown-menu {
     padding: 16px 0 !important;
     border-radius: 20px !important;
@@ -92,6 +98,7 @@
     overflow: hidden;
 }
 
+
 /* Заголовок с аватаром и именем */
 .profile-header {
     padding: 20px 24px 16px;
@@ -99,12 +106,16 @@
     border-bottom: 1px solid #E3F2FD;
     background: linear-gradient(to bottom, #F8FBFF, #FFFFFF);
 }
+
+/* Аватар в профиль-дропдауне */
 .profile-header .ant-avatar {
     width: 88px !important;
     height: 88px !important;
     border: 4px solid #6F60C1;
     box-shadow: 0 6px 16px rgba(111, 96, 193, 0.3);
 }
+
+/* Имя пользователя в профиль-дропдауне */
 .profile-header .user-name {
     font-size: 20px !important;
     font-weight: 700 !important;
@@ -112,7 +123,7 @@
     margin-top: 12px !important;
 }
 
-/* Пункты меню */
+/* Пункты меню профиля */
 .home-profile-dropdown .ant-dropdown-menu-item {
     padding: 14px 24px !important;
     font-size: 17px !important;
@@ -120,6 +131,8 @@
     transition: all 0.25s ease;
     border-radius: 0 !important;
 }
+
+/* Hover по пунктам меню профиля */
 .home-profile-dropdown .ant-dropdown-menu-item:hover {
     background-color: #ECF7FF !important;
     color: #1E69F5 !important;
@@ -131,6 +144,8 @@
     color: #E53E3E !important;
     font-weight: 600 !important;
 }
+
+/* Hover по кнопке "Выйти" */
 .profile-logout:hover {
     background-color: #FFF5F5 !important;
     color: #C53030 !important;

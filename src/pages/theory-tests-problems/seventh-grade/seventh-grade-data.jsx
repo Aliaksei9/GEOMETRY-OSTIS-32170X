@@ -4,60 +4,89 @@ import { TTPTabContent } from '../theory-tests-problems';
 import UnknownProblemsButton from './problems/UnknownProblemsButton';
 import TopicWithTestButton from './theory/TopicWithTestButton';
 
-// ==================== ТЕОРИЯ ====================
+// ==================== ТЕОРИЯ (7 класс — Геометрия РБ) ====================
 export const theory = [
-    <TopicWithTestButton
-        key="theory-1"
-        title="1. Прямая, луч, отрезок. Ломаная."
-        studyPath="theme1"
-        testTopic="Прямая, луч, отрезок. Ломаная"
-    />,
-    <TopicWithTestButton
-        key="theory-2"
-        title="2. Углы и их измерение."
-        studyPath="theme2"
-        testTopic="Углы и их измерение"
-    />,
-    <TopicWithTestButton
-        key="theory-3"
-        title="3. Треугольники."
-        studyPath="theme3"
-        testTopic="Треугольники"
-    />,
-    // Добавляй новые темы сюда
+    <TopicWithTestButton key="theory-1"  title="1. Прямая, луч, отрезок. Ломаная" studyPath="theme1" testTopic="Прямая, луч, отрезок. Ломаная" />,
+    <TopicWithTestButton key="theory-2"  title="2. Углы и их измерение" studyPath="theme2" testTopic="Углы и их измерение" />,
+    <TopicWithTestButton key="theory-3"  title="3. Смежные и вертикальные углы" studyPath="theme3" testTopic="Смежные и вертикальные углы" />,
+    <TopicWithTestButton key="theory-4"  title="4. Треугольники. Виды треугольников" studyPath="theme4" testTopic="Виды треугольников" />,
+    <TopicWithTestButton key="theory-5"  title="5. Признаки равенства треугольников" studyPath="theme5" testTopic="Признаки равенства треугольников" />,
+    <TopicWithTestButton key="theory-6"  title="6. Параллельные прямые" studyPath="theme6" testTopic="Параллельные прямые" />,
+    <TopicWithTestButton key="theory-7"  title="7. Сумма углов треугольника" studyPath="theme7" testTopic="Сумма углов треугольника" />,
+    <TopicWithTestButton key="theory-8"  title="8. Равнобедренный треугольник" studyPath="theme8" testTopic="Равнобедренный треугольник" />,
+    <TopicWithTestButton key="theory-9"  title="9. Высота, медиана, биссектриса треугольника" studyPath="theme9" testTopic="Высота, медиана, биссектриса" />,
+    <TopicWithTestButton key="theory-10" title="10. Площадь треугольника" studyPath="theme10" testTopic="Площадь треугольника" />,
+    <TopicWithTestButton key="theory-11" title="11. Прямоугольный треугольник. Теорема Пифагора" studyPath="theme11" testTopic="Теорема Пифагора" />,
+    <TopicWithTestButton key="theory-12" title="12. Окружность и круг" studyPath="theme12" testTopic="Окружность и круг" />,
+    <TopicWithTestButton key="theory-13" title="13. Центральные и вписанные углы" studyPath="theme13" testTopic="Центральные и вписанные углы" />,
+    <TopicWithTestButton key="theory-14" title="14. Вписанная и описанная окружность" studyPath="theme14" testTopic="Вписанная и описанная окружность" />,
+    <TopicWithTestButton key="theory-15" title="15. Четырёхугольники. Виды четырёхугольников" studyPath="theme15" testTopic="Виды четырёхугольников" />,
+    <TopicWithTestButton key="theory-16" title="16. Параллелограмм и его свойства" studyPath="theme16" testTopic="Параллелограмм" />,
+    <TopicWithTestButton key="theory-17" title="17. Трапеция и её свойства" studyPath="theme17" testTopic="Трапеция" />,
+    <TopicWithTestButton key="theory-18" title="18. Прямоугольник, ромб, квадрат" studyPath="theme18" testTopic="Прямоугольник, ромб, квадрат" />,
+    <TopicWithTestButton key="theory-19" title="19. Площадь параллелограмма и трапеции" studyPath="theme19" testTopic="Площадь параллелограмма и трапеции" />,
+    <TopicWithTestButton key="theory-20" title="20. Подобие треугольников. Признаки подобия" studyPath="theme20" testTopic="Подобие треугольников" />,
+    <TopicWithTestButton key="theory-21" title="21. Коэффициент подобия. Площадь подобных фигур" studyPath="theme21" testTopic="Коэффициент подобия и площадь подобных фигур" />,
+    <TopicWithTestButton key="theory-22" title="22. Теорема Фалеса" studyPath="theme22" testTopic="Теорема Фалеса" />,
+    <TopicWithTestButton key="theory-23" title="23. Средняя линия треугольника" studyPath="theme23" testTopic="Средняя линия треугольника" />,
+    <TopicWithTestButton key="theory-24" title="24. Площадь четырёхугольника" studyPath="theme24" testTopic="Площадь четырёхугольника" />,
+    <TopicWithTestButton key="theory-25" title="25. Площадь круга и его частей" studyPath="theme25" testTopic="Площадь круга и его частей" />,
 ];
 
 // ==================== ТЕСТЫ ====================
 export const tests = [
-    <TTPTabContent key="test-1" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Сдать" grade="*" path="test1" />,
-    <TTPTabContent key="test-2" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Сдано" grade="10" completed={true} path="test1" />,
-    <TTPTabContent key="test-3" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Сдано" grade="7" completed={true} path="test1" />,
-    // ← остальные тесты
+    <TTPTabContent key="test-1"  title="Прямая, луч, отрезок. Ломаная" buttonTitle="Сдано" grade="10" completed={true} path="test1" />,
+    <TTPTabContent key="test-2"  title="Углы и их измерение" buttonTitle="Сдано" grade="9" completed={true} path="test1" />,
+    <TTPTabContent key="test-3"  title="Смежные и вертикальные углы" buttonTitle="Сдать" grade="*" path="test1" />,
+    <TTPTabContent key="test-4"  title="Треугольники. Виды треугольников" buttonTitle="Сдано" grade="8" completed={true} path="test1" />,
+    <TTPTabContent key="test-5"  title="Признаки равенства треугольников" buttonTitle="Сдано" grade="10" completed={true} path="test1" />,
+    <TTPTabContent key="test-6"  title="Параллельные прямые" buttonTitle="Сдано" grade="7" completed={true} path="test1" />,
+    <TTPTabContent key="test-7"  title="Сумма углов треугольника" buttonTitle="Сдано" grade="10" completed={true} path="test1" />,
+    <TTPTabContent key="test-8"  title="Равнобедренный треугольник" buttonTitle="Сдать" grade="*" path="test1" />,
+    <TTPTabContent key="test-9"  title="Высота, медиана, биссектриса" buttonTitle="Сдано" grade="9" completed={true} path="test1" />,
+    <TTPTabContent key="test-10" title="Площадь треугольника" buttonTitle="Сдано" grade="10" completed={true} path="test1" />,
+    <TTPTabContent key="test-11" title="Теорема Пифагора" buttonTitle="Сдано" grade="6" completed={true} path="test1" />,
+    <TTPTabContent key="test-12" title="Окружность и круг" buttonTitle="Сдать" grade="*" path="test1" />,
+    <TTPTabContent key="test-13" title="Центральные и вписанные углы" buttonTitle="Сдано" grade="9" completed={true} path="/test/central-inscribed" />,
+    <TTPTabContent key="test-14" title="Вписанная и описанная окружность" buttonTitle="Сдано" grade="10" completed={true} path="/test/incircle-circumcircle" />,
+    <TTPTabContent key="test-15" title="Четырёхугольники. Виды" buttonTitle="Сдано" grade="8" completed={true} path="/test/quadrilaterals" />,
+    <TTPTabContent key="test-16" title="Параллелограмм и его свойства" buttonTitle="Сдать" grade="*" path="/test/paralellogram" />,
+    <TTPTabContent key="test-17" title="Трапеция и её свойства" buttonTitle="Сдано" grade="9" completed={true} path="/test/trapezoid" />,
+    <TTPTabContent key="test-18" title="Прямоугольник, ромб, квадрат" buttonTitle="Сдано" grade="10" completed={true} path="/test/special-quads" />,
+    <TTPTabContent key="test-19" title="Площадь параллелограмма и трапеции" buttonTitle="Сдано" grade="7" completed={true} path="/test/quad-area" />,
+    <TTPTabContent key="test-20" title="Подобие треугольников" buttonTitle="Сдано" grade="10" completed={true} path="/test/similarity" />,
+    <TTPTabContent key="test-21" title="Коэффициент подобия и площадь" buttonTitle="Сдать" grade="*" path="/test/similarity-ratio" />,
+    <TTPTabContent key="test-22" title="Теорема Фалеса" buttonTitle="Сдано" grade="9" completed={true} path="/test/thales" />,
+    <TTPTabContent key="test-23" title="Средняя линия треугольника" buttonTitle="Сдано" grade="10" completed={true} path="/test/midline" />,
+    <TTPTabContent key="test-24" title="Площадь четырёхугольника" buttonTitle="Сдано" grade="8" completed={true} path="/test/quad-area-advanced" />,
+    <TTPTabContent key="test-25" title="Площадь круга и его частей" buttonTitle="Сдано" grade="9" completed={true} path="/test/circle-area" />,
+];
+// ==================== ЗАДАЧИ ====================
+export const problems = [
+    <TTPTabContent key="prob-1"  title="Длина отрезка AB, если A(1,2), B(5,6)" buttonTitle="Решено" completed={true} path="/problem/segment-length" />,
+    <TTPTabContent key="prob-2"  title="Построить угол 120° с вершиной в точке O" buttonTitle="Решить" path="/problem/construct-120" />,
+    <TTPTabContent key="prob-3"  title="Доказать, что углы смежные" buttonTitle="Решено" completed={true} path="/problem/adjacent-proof" />,
+    <TTPTabContent key="prob-4"  title="Найти неизвестный угол треугольника" buttonTitle="Решено" completed={true} path="/problem/triangle-unknown-angle" />,
+    <TTPTabContent key="prob-5"  title="Проверить равенство треугольников по SSS" buttonTitle="Решено" completed={true} path="/problem/sss-equality" />,
+    <TTPTabContent key="prob-6"  title="Доказать параллельность прямых" buttonTitle="Решить" path="/problem/parallel-proof" />,
+    <TTPTabContent key="prob-7"  title="Вычислить сумму углов в треугольнике ABC" buttonTitle="Решено" completed={true} path="/problem/sum-angles-abc" />,
+    <TTPTabContent key="prob-8"  title="Найти высоту равнобедренного треугольника" buttonTitle="Решить" path="/problem/isosceles-height" />,
+    <TTPTabContent key="prob-9"  title="Построить медиану из вершины A" buttonTitle="Решено" completed={true} path="/problem/median-a" />,
+    <TTPTabContent key="prob-10" title="Найти площадь треугольника по основанию и высоте" buttonTitle="Решено" completed={true} path="/problem/area-base-height" />,
+    <TTPTabContent key="prob-11" title="Применить теорему Пифагора: найти гипотенузу" buttonTitle="Решено" completed={true} path="/problem/pythagoras-hyp" />,
+    <TTPTabContent key="prob-12" title="Найти длину окружности с радиусом 7 см" buttonTitle="Решить" path="/problem/circumference-7" />,
+    <TTPTabContent key="prob-13" title="Найти центральный угол по дуге" buttonTitle="Решено" completed={true} path="/problem/central-angle" />,
+    <TTPTabContent key="prob-14" title="Доказать, что окружность описана около треугольника" buttonTitle="Решено" completed={true} path="/problem/circumscribed" />,
+    <TTPTabContent key="prob-15" title="Определить вид четырёхугольника по сторонам" buttonTitle="Решить" path="/problem/quad-type" />,
+    <TTPTabContent key="prob-16" title="Найти диагонали параллелограмма" buttonTitle="Решено" completed={true} path="/problem/parallelogram-diagonals" />,
+    <TTPTabContent key="prob-17" title="Вычислить площадь трапеции" buttonTitle="Решено" completed={true} path="/problem/trapezoid-area" />,
+    <TTPTabContent key="prob-18" title="Доказать, что четырёхугольник — ромб" buttonTitle="Решить" path="/problem/rhombus-proof" />,
+    <TTPTabContent key="prob-19" title="Найти периметр квадрата по диагонали" buttonTitle="Решено" completed={true} path="/problem/square-perimeter" />,
+    <TTPTabContent key="prob-20" title="Доказать подобие двух треугольников по AA" buttonTitle="Решено" completed={true} path="/problem/similarity-aa" />,
+    <TTPTabContent key="prob-21" title="Найти коэффициент подобия фигур" buttonTitle="Решить" path="/problem/similarity-ratio" />,
+    <TTPTabContent key="prob-22" title="Применить теорему Фалеса" buttonTitle="Решено" completed={true} path="/problem/thales-application" />,
+    <TTPTabContent key="prob-23" title="Найти длину средней линии треугольника" buttonTitle="Решено" completed={true} path="/problem/midline-length" />,
+    <TTPTabContent key="prob-24" title="Вычислить площадь произвольного четырёхугольника" buttonTitle="Решить" path="/problem/quad-area-complex" />,
+    <TTPTabContent key="prob-25" title="Найти площадь сектора круга" buttonTitle="Решено" completed={true} path="/problem/sector-area" />,
 ];
 
-// ==================== ЗАДАЧИ ====================
-// УБИРАЕМ UnknownProblemsButton отсюда — он больше не должен быть в списке!
-export const problems = [
-    <TTPTabContent key="problem-1" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-2" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
-    <TTPTabContent key="problem-3" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-4" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
-    <TTPTabContent key="problem-5" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
-    <TTPTabContent key="problem-6" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-7" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-8" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-9" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
-    <TTPTabContent key="problem-10" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-11" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
-    <TTPTabContent key="problem-12" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
-    <TTPTabContent key="problem-13" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-14" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-15" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-16" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
-    <TTPTabContent key="problem-17" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-18" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
-    <TTPTabContent key="problem-19" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решено" completed={true} path="problem1" />,
-    <TTPTabContent key="problem-20" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    <TTPTabContent key="problem-21" title="1. Прямая, луч, отрезок. Ломаная." buttonTitle="Решить" path="problem1" />,
-    // ← остальные задачи
-];

@@ -4,7 +4,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { theory, tests, problems } from './seventh-grade-data';
 import { useNavigate } from 'react-router';
 import ChatButton from '../../../components/corner-chat/corner-chat-button';
-import UnknownProblemsButton from './problems/UnknownProblemsButton'; // ← импортируем сюда!
+import UnknownProblemsButton from './problems/UnknownProblemsButton'; 
 import Logo from '../../../media/og.png';
 import '../../../index.css';
 import '../../../pages/home/home.css';
@@ -99,9 +99,9 @@ function SeventhGradeTTP() {
                     menu={{ items: profileDropdownItems }}
                     placement="bottomRight"
                     trigger={['click']}
-                    overlayClassName="home-profile-dropdown"  // ← используем тот же класс, что и на главной
+                    overlayClassName="home-profile-dropdown"  
                     dropdownRender={(menu) => (
-                        <div style={{ borderRadius: '20px', overflow: 'hidden' }}>
+                        <div style={{ marginTop: '23px', borderRadius: '20px', overflow: 'hidden' }}>
                             {React.cloneElement(menu)}
                         </div>
                     )}

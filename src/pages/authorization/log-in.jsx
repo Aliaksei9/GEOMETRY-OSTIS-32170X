@@ -9,7 +9,7 @@ function LogIn() {
 
     const onFinish = (values) => {
         console.log('Log In Success:', values);
-        navigate('/home'); // или '/'
+        navigate('/home'); 
     };
 
     const onFinishFailed = (errorInfo) => {

@@ -1,5 +1,4 @@
 // src/pages/seventh-grade/UnknownProblemsChat.jsx
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Typography, Input, Button, Spin } from 'antd';
 import Header from '../../header';
@@ -15,7 +14,7 @@ function UnknownProblemsChat() {
     const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef(null);
 
-    const API_URL = 'http://localhost:8000/chat'; // Замените на реальный URL API, если нужно (например, в продакшене)
+    const API_URL = 'http://localhost:8000/chat'; // реальный URL API
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -50,7 +49,6 @@ function UnknownProblemsChat() {
             setMessages(prev => [...prev, { role: 'assistant', content: data.response }]);
         } catch (error) {
             console.error('Error sending message:', error);
-            // Опционально: добавить сообщение об ошибке в чат
             setMessages(prev => [...prev, { role: 'assistant', content: 'Произошла ошибка при отправке сообщения. Попробуйте позже.' }]);
         } finally {
             setLoading(false);

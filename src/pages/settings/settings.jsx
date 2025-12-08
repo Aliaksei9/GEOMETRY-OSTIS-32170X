@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Typography, Form, Input, Switch, Button, Space } from 'antd';
 import { useNavigate } from 'react-router';
-import Header from '../../pages/theory-tests-problems/header'; // ← твой общий Header
+import Header from '../../pages/theory-tests-problems/header'; 
 import ChatButton from '../../components/corner-chat/corner-chat-button';
 import './settings.css';
 

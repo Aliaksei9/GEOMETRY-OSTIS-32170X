@@ -31,7 +31,7 @@ function Theme1() {
         <div className="ttp-root-wrapper">
             <Header showBackButton={true} />
 
-            {/* Боковая панель — без изменений */}
+            {/* Боковая панель */}
             <div
                 className="sidebar-navigation"
                 style={{
@@ -56,7 +56,7 @@ function Theme1() {
                 />
             </div>
 
-            {/* Центральная часть — ТОЧНО как у тебя было */}
+            {/* Центральная часть  */}
             <div style={{
                 width: '100%',
                 display: 'flex',
@@ -73,17 +73,15 @@ function Theme1() {
                         borderRadius: '15px',
                         padding: '20px',
                         boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-
-                        /* КЛЮЧЕВЫЕ ИСПРАВЛЕНИЯ — теперь блок НЕ ВЫЛЕЗЕТ за экран */
-                        height: '1330px',   // 100px ≈ высота хедера + отступы
+                        height: '1330px',   
                         maxHeight: 'calc(100vh - 100px)',
                         display: 'flex',
                         flexDirection: 'column',
-                        overflow: 'hidden',              // убираем любой скролл у самого блока
+                        overflow: 'hidden',             
                         boxSizing: 'border-box',
                     }}
                 >
-                    {/* Заголовок темы — фиксирован сверху */}
+                    {/* Заголовок темы */}
                     <div style={{
                         borderBottom: '1px solid #84B7EE',
                         paddingBottom: '12px',
@@ -96,7 +94,7 @@ function Theme1() {
                         </Text>
                     </div>
 
-                    {/* ТОЛЬКО ЭТОТ DIV СКРОЛЛИТСЯ */}
+                    {/* ЭТОТ DIV СКРОЛЛИТСЯ */}
                     <div
                         ref={scrollRef}
                         className="ttp-scroll-area"
@@ -105,10 +103,10 @@ function Theme1() {
                             overflowY: 'auto',
                             overflowX: 'hidden',
                             paddingRight: '80px',  
-                            paddingLeft: '80px', // место под красивый скроллбар
+                            paddingLeft: '80px', 
                         }}
                     >
-                        {/* ← ВЕСЬ ТВОЙ КОНТЕНТ ТЕМЫ ЗДЕСЬ → */}
+                        {/* ВЕСЬ ТВОЙ КОНТЕНТ ТЕМЫ */}
                         <Text strong style={{ fontSize: '28px', color: '#1E3A8A', display: 'block', marginBottom: '20px' }}>
                             I. Прямая, луч, отрезок.
                         </Text>

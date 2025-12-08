@@ -165,7 +165,7 @@ function Home() {
                         trigger={['click']}
                         overlayClassName="home-profile-dropdown"
                         dropdownRender={(menu) => (
-                            <div style={{ borderRadius: '20px', overflow: 'hidden', boxShadow: '0 16px 40px rgba(111,96,193,0.28)' }}>
+                            <div style={{ marginTop: '20px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 16px 40px rgba(111,96,193,0.28)' }}>
                                 {cloneElement(menu)}
                             </div>
                         )}
@@ -188,7 +188,7 @@ function Home() {
                 </div>
             </div>
             {/* ====================== ГЛАВНЫЙ КОНТЕНТ ====================== */}
-            <div id='home-main'>
+	    <div id='home-main'>
                 <div
                     style={{
                         width: '100%',
@@ -202,20 +202,51 @@ function Home() {
                         color: 'white',
                     }}
                 >
-                    <div style={{ maxWidth: '80%', display: 'flex', flexDirection: 'column' }}>
-                        <Text strong style={{ fontSize: '80px', background: 'linear-gradient(90deg, #6F60C1 0%, #043BE4 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', marginBottom: '10px' }}>
+                    <div style={{ 
+                        maxWidth: '80%', 
+                        display: 'flex', 
+                        flexDirection: 'column' 
+                    }}>
+                        <Text 
+                            strong 
+                            style={{ 
+                                fontSize: '80px',
+                                background: 'linear-gradient(90deg, #6F60C1 0%, #043BE4 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                                textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                                marginBottom: '10px'
+                            }}
+                        >
                             Добро пожаловать на OSTIS geometry
                         </Text>
                         <Text
                             strong
                             className='plain-text'
-                            style={{ fontSize: '42px', lineHeight: '45px', whiteSpace: 'pre-line', color: '#6F60C1', textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
+                            style={{ 
+                                fontSize: '42px',
+                                lineHeight: '45px',
+                                whiteSpace: 'pre-line',
+                                color: '#6F60C1',
+                                textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
+                            }}
                         >
                             {`Интеллектуальная платформа\nдля обучения`}
                         </Text>
                         <Paragraph
                             strong
-                            style={{ width: '140%', marginTop: '250px', fontSize: '40px', lineHeight: '60px', background: 'linear-gradient(90deg, #8C90E6 0%, #8C90E6 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', whiteSpace: 'pre-line' }}
+                            style={{ 
+                                width: '140%',
+                                marginTop: '250px',
+                                fontSize: '40px',
+                                lineHeight: '60px',
+                                background: 'linear-gradient(90deg, #8C90E6 0%, #8C90E6 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                                whiteSpace: 'pre-line'
+                            }}
                         >
                             {`Интеллектуальная диалоговая\nсистема помогает пользователю в\nизучении отдельных тем по\n геометрии, в рамках учебной\nпрограммы РБ по геометрии`}
                         </Paragraph>

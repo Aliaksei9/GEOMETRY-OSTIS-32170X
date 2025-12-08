@@ -12,13 +12,8 @@ function Authorization() {
 
     return (
         <div className="authorization-page">
-            {/* ЛОГОТИП СНАЧАЛА */}
             <img src={Logo} alt="OSTIS Geometry" className="auth-logo" />
-
-            {/* НАЗВАНИЕ ПОД ЛОГОТИПОМ */}
             <Text strong className="app-title">OSTIS Geometry</Text>
-
-            {/* Основной блок */}
             <div className="authorization-box">
                 <Text strong className="authorization-title">
                     {isLogin ? 'Log In' : 'Sign Up'}

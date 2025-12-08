@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, Typography } from 'antd';
 import { UserOutlined, MailOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
-import Header from '../../pages/theory-tests-problems/header'; // ← твой общий Header с кнопкой "Назад"
+import Header from '../../pages/theory-tests-problems/header'; 
 import ChatButton from '../../components/corner-chat/corner-chat-button';
 import Logo from '../../media/og.png';
 import './profile.css';
