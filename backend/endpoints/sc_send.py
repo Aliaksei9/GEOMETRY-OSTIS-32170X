@@ -7,6 +7,7 @@ from sc_kpm.identifiers import ScAlias
 from sc_kpm import ScKeynodes
 from sc_kpm.utils import generate_connector, generate_link, generate_node
 from typing import Dict, List, Any
+from .agent_chain_executor import AgentChainExecutor
 
 class SCAdapter:
 
@@ -14,7 +15,6 @@ class SCAdapter:
         self.url = url
         self._connected = False
         self.parsedSolvingSteps = None
-
 
 
     # --- Подключение и отключение ---
@@ -48,159 +48,6 @@ class SCAdapter:
         
         print(f"Created {len(connector_addrs)} connectors to main node")
         return connector_addrs
-
-    def _start_agent_chain(self, construction_structure: ScAddr):
-        """Запускает цепочку агентов после загрузки конструкции"""
-        try:
-            # Запускаем первого агента
-            first_agent_result = self._start_agent(
-                "action_search_geometry_constructions", 
-                construction_structure
-            )
-            if first_agent_result:
-                # Запускаем второго агента с результатом первого
-                second_agent_result = self._start_agent(
-                    "action_extract_geometry_sequence",
-                    first_agent_result
-                )
-                if second_agent_result:
-                    # Запускаем третьего агента с результатом второго
-                    third_agent_result = self._start_agent(
-                        "action_parse_geometry_sequence",
-                        second_agent_result
-                    )
-                    if third_agent_result:
-                        # Находим scLink и сохраняем его содержимое
-                        self._find_and_save_link_content(third_agent_result)
-
-                    print(f"Цепочка агентов завершена. Финальный результат: {third_agent_result}")
-                else:
-                    print("Второй агент не вернул результат")
-            else:
-                print("Первый агент не вернул результат")
-                
-        except Exception as e:
-            print(f"Ошибка при запуске цепочки агентов: {e}")
-
-    def _find_and_save_link_content(self, result_node: ScAddr):
-
-        template = ScTemplate()
-
-        template.triple(
-            result_node,
-            sc_type.VAR_ARC >> "_arc",
-            sc_type.VAR_NODE_LINK >> "_link"
-        )
-
-        results = search_by_template(template)
-        for result in results:
-            link_node = result.get("_link")
-            content: ScLinkContent = get_link_content(link_node)[0]
-            self.parsedSolvingSteps = content.data
-            print(content.data)
-        return None
-
-
-
-
-    def _start_agent(self, agent_identifier: str, agent_argument: ScAddr) -> ScAddr:
-        """Запускает агента и возвращает результат"""
-        try:
-            action_node = ScKeynodes.resolve('action', sc_type.CONST_NODE_CLASS)
-            action_initiated_node = ScKeynodes.resolve('action_initiated', sc_type.CONST_NODE)
-            rrel_1_node = ScKeynodes.resolve('rrel_1', sc_type.CONST_NODE_ROLE)
-            agent_node = ScKeynodes.resolve(agent_identifier, sc_type.CONST_NODE_CLASS)
-            
-            # Создаем экземпляр агента
-            agent_instance_node = generate_node(sc_type.CONST_NODE)
-            
-            # Связываем аргумент с агентом через rrel_1
-            self.generate_role_relation(agent_instance_node, agent_argument, rrel_1_node)
-            
-            # Создаем связи для запуска агента
-            generate_connector(sc_type.CONST_PERM_POS_ARC, action_node, agent_instance_node)
-            generate_connector(sc_type.CONST_PERM_POS_ARC, agent_node, agent_instance_node)
-            generate_connector(sc_type.CONST_PERM_POS_ARC, action_initiated_node, agent_instance_node)
-            
-            print(f"Запущен агент: {agent_identifier}")
-            
-            # Ждем завершения агента и получаем результат
-            return self._wait_for_agent_result(agent_instance_node)
-            
-        except Exception as e:
-            print(f"Ошибка при запуске агента {agent_identifier}: {e}")
-            return None
-
-    def _wait_for_agent_result(self, agent_instance_node: ScAddr) -> ScAddr:
-        """Ожидает завершения агента и возвращает результат"""
-        import time
-        from sc_client.client import search_by_template
-        from sc_client.models import ScTemplate
-        
-        max_wait_time = 400  # секунд
-        check_interval = 0.5  # секунд
-        waited_time = 0
-        
-        nrel_result = ScKeynodes.resolve("nrel_result", sc_type.CONST_NODE_NON_ROLE)
-        
-        while waited_time < max_wait_time:
-            try:
-                # Ищем результат агента
-                template = ScTemplate()
-                template.quintuple(
-                    agent_instance_node,
-                    sc_type.VAR_ARC >> "_main_arc",
-                    sc_type.VAR_NODE >> "_result",
-                    sc_type.VAR_PERM_POS_ARC >> "_rel_arc",
-                    nrel_result
-                )
-                
-                results = search_by_template(template)
-                
-                if results:
-                    result_node = results[0].get("_result")
-                    if result_node and result_node.is_valid():
-                        print(f"Агент завершился, найден результат: {result_node}")
-                        return result_node
-                
-                # Проверяем статус завершения агента
-                if self._is_agent_finished(agent_instance_node):
-                    print("Агент завершился, но результат не найден")
-                    return None
-                    
-                time.sleep(check_interval)
-                waited_time += check_interval
-                
-            except Exception as e:
-                print(f"Ошибка при ожидании результата агента: {e}")
-                time.sleep(check_interval)
-                waited_time += check_interval
-        
-        print(f"Таймаут ожидания результата агента ({max_wait_time} секунд)")
-        return None
-
-    def _is_agent_finished(self, agent_instance_node: ScAddr) -> bool:
-        """Проверяет, завершился ли агент"""
-        from sc_client.client import search_by_template
-        from sc_client.models import ScTemplate
-        
-        try:
-            action_finished_node = ScKeynodes.resolve('action_finished', sc_type.CONST_NODE)
-            
-            template = ScTemplate()
-            template.triple(
-                action_finished_node,
-                sc_type.VAR_PERM_POS_ARC >> "_arc",
-                agent_instance_node
-            )
-            
-            results = search_by_template(template)
-            return len(results) > 0
-            
-        except Exception as e:
-            print(f"Ошибка при проверке статуса агента: {e}")
-            return False
-
 
     # --- Основной метод загрузки конструкции ---
     def upload_construction(self, construction_data: Dict[str, Any]):
@@ -240,13 +87,12 @@ class SCAdapter:
             relationships_addrs = self._create_relationships(relationships)
             all_addrs.extend(relationships_addrs)
 
-
-
             self._connect_all_to_main_node(main_node, all_addrs)
             print("Successfully uploaded construction to SC-memory.")
 
             print("Запуск цепочки агентов...")
-            self._start_agent_chain(main_node)
+            chainExecutor = AgentChainExecutor() 
+            self.parsedSolvingSteps = chainExecutor._execute_agent_chain(main_node)
 
             return True, all_addrs
 
