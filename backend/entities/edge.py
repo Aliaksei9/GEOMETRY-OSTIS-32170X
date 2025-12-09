@@ -11,8 +11,8 @@ class Point(BaseModel):
         return name
 
 class Edge(BaseModel):
-    vert1: str  # Изменено с Point на str
-    vert2: str  # Изменено с Point на str
+    vert1: str 
+    vert2: str  
     length: Optional[float] = None
 
     @validator('vert1', 'vert2')

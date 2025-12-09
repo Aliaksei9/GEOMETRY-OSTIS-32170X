@@ -35,11 +35,11 @@ class ConstructionElementInput(BaseModel):
     angle: Optional[AngleInput] = None
 
 class RelationshipInput(BaseModel):
-    type: str  # "role" or "nonrole"
+    type: str 
     name: str
     source_entity: str
     target_entity: str
-    oriented: bool = True  # Новое поле: по умолчанию ориентированное
+    oriented: bool = True 
 
 class ConstructionElementsContainerInput(BaseModel):
     construction_elements: List[ConstructionElementInput]

@@ -7,13 +7,13 @@ class Relationship:
         name: str,
         source_entity: Any,
         target_entity: Any,
-        oriented: bool = True  # Новый параметр
+        oriented: bool = True 
     ):
         self.type = rel_type
         self.name = name
         self.source_entity = source_entity
         self.target_entity = target_entity
-        self.oriented = oriented  # Сохраняем ориентацию
+        self.oriented = oriented 
 
     def __str__(self):
         source_name = self._get_entity_name(self.source_entity)

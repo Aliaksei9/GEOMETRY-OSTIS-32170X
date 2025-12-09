@@ -60,15 +60,13 @@ async def upload_construction(construction_input: ComplexConstructionInput):
         }
         
         for obj in business_objects:
-            # В обработке полигонов изменим формирование edge_names
             if obj["type"] == "polygon":
                 polygon = obj["object"]
-                # Теперь edge.vert1 и edge.vert2 - это строки, а не объекты Point
                 edge_names = [f"{edge.vert1}{edge.vert2}" for edge in polygon.edges]
                 result["figures"].append({
                     "type": obj["subtype"],
                     "name": obj["name"],
-                    "vertices": [v.name for v in polygon.vertices],  # Только явно созданные точки
+                    "vertices": [v.name for v in polygon.vertices], 
                     "edges": edge_names,
                     "vertex_count": len(polygon.vertices),
                     "input_data": obj["input_data"]
@@ -120,7 +118,7 @@ async def upload_construction(construction_input: ComplexConstructionInput):
                 "name": relationship.name,
                 "source_entity": relationship.source_entity,
                 "target_entity": relationship.target_entity,
-                "oriented": relationship.oriented  # Добавляем ориентацию
+                "oriented": relationship.oriented 
             })
         
         parsing_result = ""
@@ -134,7 +132,6 @@ async def upload_construction(construction_input: ComplexConstructionInput):
         except Exception as e:
             parsing_result = f"SC-memory error: {e}"
         
-        # Парсим JSON строку в объект Python и возвращаем как отформатированный JSON
         return json.loads(parsing_result)
         
     except ValueError as e:

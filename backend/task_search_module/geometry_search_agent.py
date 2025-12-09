@@ -105,15 +105,14 @@ class GeometrySearchAgent(ScAgentClassic):
         try:
             template = ScTemplate()
             
-            # Используем пятёрку: CONST_NODE --arc--> STRUCT, связанная через nrel_context_of_action
             nrel_context = ScKeynodes.resolve("nrel_context_of_the_action", sc_type.CONST_NODE_NON_ROLE)
             
             template.quintuple(
-                sc_type.VAR_NODE >> "_const_node",           # source
-                sc_type.VAR_COMMON_ARC >> "_arc",          # connector  
-                sc_type.VAR_NODE_STRUCTURE >> "_structure",            # target
-                sc_type.VAR_PERM_POS_ARC >> "_context_arc",  # attribute_connector
-                nrel_context                                 # attribute
+                sc_type.VAR_NODE >> "_const_node",         
+                sc_type.VAR_COMMON_ARC >> "_arc",         
+                sc_type.VAR_NODE_STRUCTURE >> "_structure",         
+                sc_type.VAR_PERM_POS_ARC >> "_context_arc",  
+                nrel_context                                 
             )
             
             search_results = search_by_template(template)
@@ -141,7 +140,6 @@ class GeometrySearchAgent(ScAgentClassic):
         nodes = []
         
         try:
-            # Ищем все элементы, принадлежащие структуре
             template = ScTemplate()
             template.triple(
                 structure,
@@ -166,14 +164,11 @@ class GeometrySearchAgent(ScAgentClassic):
         """Фильтрует структуры, проверяя тройки и пятёрки"""
         matching_structures = []
         
-        # Создаем копию массива кандидатов для фильтрации
         remaining_candidates = candidate_structures.copy()
         
-        # Логируем количество кандидатов до начала отсеивания
         logging.info(f"Кандидатов до начала отсеивания: {len(remaining_candidates)}")
         
         try:
-            # Проходим по всем нодам входной структуры
             for node in input_nodes:
                 node_idtf = get_element_system_identifier(node) or f"unknown_{node.value}"
                 logging.info(f"Обрабатываем ноду: {node_idtf}")
@@ -188,7 +183,6 @@ class GeometrySearchAgent(ScAgentClassic):
                 
                 logging.info(f"После обработки ноды осталось кандидатов: {len(remaining_candidates)}")
                 
-                # Если кандидатов не осталось, прерываем цикл
                 if not remaining_candidates:
                     break
             
@@ -248,7 +242,7 @@ class GeometrySearchAgent(ScAgentClassic):
             template_quintuple_nonrole_edge = ScTemplate()
             template_quintuple_nonrole_edge.quintuple(
                 node >> "_source",
-                sc_type.VAR_COMMON_EDGE >> "_main_edge",  # НЕОРИЕНТИРОВАННОЕ ребро
+                sc_type.VAR_COMMON_EDGE >> "_main_edge", 
                 sc_type.VAR_NODE >> "_target", 
                 sc_type.VAR_ARC >> "_rel_arc",
                 sc_type.VAR_NODE_NON_ROLE >> "_relation"
@@ -261,7 +255,6 @@ class GeometrySearchAgent(ScAgentClassic):
             patterns.extend(self.execute_template_search(template_quintuple_role_edge, "quintuple_role_edge", structure))
             patterns.extend(self.execute_template_search(template_quintuple_nonrole_edge, "quintuple_nonrole_edge", structure))
             
-            # Логируем системные идентификаторы элементов паттернов
             self.log_pattern_elements(patterns)
             
         except Exception as e:
@@ -282,7 +275,6 @@ class GeometrySearchAgent(ScAgentClassic):
                     "elements": {}
                 }
                 
-                # Правильно извлекаем элементы из ScTemplateResult
                 aliases = ["_source", "_target", "_arc", "_main_arc", "_rel_arc", "_relation", "_main_edge"]
                 
                 for alias in aliases:
@@ -291,7 +283,6 @@ class GeometrySearchAgent(ScAgentClassic):
                         if element and element.is_valid():
                             pattern_data["elements"][alias] = element
                     except:
-                        # Если элемента с таким алиасом нет, пропускаем
                         pass
                 
                 # Проверяем, что ВСЕ элементы паттерна (ноды и дуги) принадлежат нашей структуре
@@ -309,9 +300,7 @@ class GeometrySearchAgent(ScAgentClassic):
         """Проверяет, что все элементы паттерна (ноды и дуги) принадлежат структуре"""
         try:
             for alias, element in pattern["elements"].items():
-                # Проверяем ВСЕ элементы (и ноды и дуги)
                 if element and element.is_valid():
-                    # Проверяем, что элемент принадлежит структуре
                     if not self.element_belongs_to_structure(element, structure):
                         logging.debug(f"Элемент {alias} не принадлежит структуре: {element.value}")
                         return False
@@ -401,12 +390,9 @@ class GeometrySearchAgent(ScAgentClassic):
     def check_pattern_in_candidate(self, candidate_structure: ScAddr, pattern: dict) -> bool:
         """Проверяет, содержится ли паттерн в структуре-кандидате с использованием переменных дуг и безымянных нод"""
         try:
-            # Создаем шаблон для проверки в кандидате
             check_template = ScTemplate()
             
-            # Проверяем, что все НОДЫ паттерна принадлежат кандидату
             for alias, element in pattern["elements"].items():
-                # Проверяем только НОДЫ (дуги игнорируем, так как в кандидате они будут другими)
                 if (element and element.is_valid() and 
                     not alias.endswith("_arc") and 
                     alias not in ["_main_arc", "_rel_arc", '_main_edge']):
@@ -416,10 +402,8 @@ class GeometrySearchAgent(ScAgentClassic):
                     
                     # Если нода безымянная, используем переменную ноду того же типа
                     if not element_idtf or element_idtf.startswith("unknown_") or element_idtf.startswith("element_") or get_elements_types(element)[0] == sc_type.CONST_NODE:
-                        # Получаем тип безымянной ноды
                         element_type = self.get_element_type(element)
                         
-                        # Используем переменную ноду вместо конкретной безымянной
                         if element_type.is_node():
                             if element_type.is_const():
                                 if element_type == sc_type.CONST_NODE_CLASS:
@@ -427,48 +411,42 @@ class GeometrySearchAgent(ScAgentClassic):
                                     check_template.triple(
                                         candidate_structure,
                                         sc_type.VAR_PERM_POS_ARC >> f"_struct_arc_{alias}",
-                                        sc_type.VAR_NODE_CLASS >> f"_var_node_{alias}"  # ПЕРЕМЕННАЯ нода!
+                                        sc_type.VAR_NODE_CLASS >> f"_var_node_{alias}" 
                                     )
                                 else:
                                     check_template.triple(
                                         candidate_structure,
                                         sc_type.VAR_PERM_POS_ARC >> f"_struct_arc_{alias}",
-                                        sc_type.VAR_NODE >> f"_var_node_{alias}"  # ПЕРЕМЕННАЯ нода!
+                                        sc_type.VAR_NODE >> f"_var_node_{alias}"  
                                     )
                             else:
                                 check_template.triple(
                                     candidate_structure,
                                     sc_type.VAR_PERM_POS_ARC >> f"_struct_arc_{alias}",
-                                    sc_type.VAR_NODE >> f"_var_node_{alias}"  # ПЕРЕМЕННАЯ нода!
+                                    sc_type.VAR_NODE >> f"_var_node_{alias}"  
                                 )
                         else:
-                            # Для других типов также используем переменные
                             check_template.triple(
                                 candidate_structure,
                                 sc_type.VAR_PERM_POS_ARC >> f"_struct_arc_{alias}",
-                                sc_type.VAR_NODE >> f"_var_node_{alias}"  # ПЕРЕМЕННАЯ нода!
+                                sc_type.VAR_NODE >> f"_var_node_{alias}" 
                             )
                     else:
-                        # Для именованных нод проверяем принадлежность как обычно
                         check_template.triple(
                             candidate_structure,
                             sc_type.VAR_PERM_POS_ARC >> f"_struct_arc_{alias}",
                             element
                         )
-            
-            # Восстанавливаем связи между элементами с использованием ПЕРЕМЕННЫХ дуг и нод
-            # ВЫНЕСЕНО ИЗ ЦИКЛА!
+        
             if pattern["type"].startswith("triple"):
                 self.reconstruct_triple_pattern_with_variable_elements(check_template, pattern)
             elif pattern["type"].startswith("quintuple"):
                 self.reconstruct_quintuple_pattern_with_variable_elements(check_template, pattern)
             
-            # Выполняем проверку - ВЫНЕСЕНО ИЗ ЦИКЛА!
             results = search_by_template(check_template)
             found = len(results) > 0
             
             if found:
-                # Логируем найденный паттерн с идентификаторами нод
                 self.log_found_pattern_in_candidate(candidate_structure, pattern, results[0])
                 logging.debug(f"Паттерн {pattern['type']} найден в кандидате")
             else:
@@ -488,7 +466,6 @@ class GeometrySearchAgent(ScAgentClassic):
             logging.info(f"=== НАЙДЕН ПАТТЕРН В СТРУКТУРЕ-КАНДИДАТЕ {candidate_idtf} ===")
             logging.info(f"Тип паттерна: {pattern['type']}")
             
-            # Логируем элементы исходного паттерна
             logging.info("Элементы исходного паттерна:")
             for alias, element in pattern["elements"].items():
                 if element and element.is_valid():
@@ -497,7 +474,6 @@ class GeometrySearchAgent(ScAgentClassic):
                     type_name = self.get_type_name(element_type)
                     logging.info(f"  - {alias}: {element_idtf} (type: {type_name}, addr: {element.value})")
             
-            # Логируем найденные элементы в кандидате
             logging.info("Найденные элементы в кандидате:")
             for alias in pattern["elements"].keys():
                 if alias in ["_source", "_target", "_relation"]:
@@ -509,7 +485,6 @@ class GeometrySearchAgent(ScAgentClassic):
                             found_type_name = self.get_type_name(found_type)
                             logging.info(f"  - {alias}: {found_idtf} (type: {found_type_name}, addr: {found_element.value})")
                     except:
-                        # Если не нашли переменную ноду, проверяем конкретный элемент
                         element = pattern["elements"][alias]
                         if element and element.is_valid():
                             element_idtf = get_element_system_identifier(element) or f"unknown_{element.value}"
@@ -536,18 +511,16 @@ class GeometrySearchAgent(ScAgentClassic):
             source = None
             target = None
             
-            # Находим элементы тройки
             for alias, element in pattern["elements"].items():
                 if alias == "_source":
                     source = self.get_element_for_reconstruction(element, "_source")
                 elif alias == "_target":
                     target = self.get_element_for_reconstruction(element, "_target")
             
-            # Если нашли source и target, восстанавливаем тройку с ПЕРЕМЕННОЙ дугой
             if source and target:
                 template.triple(
                     source,
-                    sc_type.VAR_PERM_POS_ARC >> "_var_arc",  # ПЕРЕМЕННАЯ дуга!
+                    sc_type.VAR_PERM_POS_ARC >> "_var_arc", 
                     target
                 )
                 
@@ -562,7 +535,6 @@ class GeometrySearchAgent(ScAgentClassic):
             relation = None
             main_arc_type = sc_type.VAR_COMMON_ARC
             
-            # Находим элементы пятёрки
             for alias, element in pattern["elements"].items():
                 if alias == "_source":
                     source = self.get_element_for_reconstruction(element, "_source")
@@ -571,7 +543,6 @@ class GeometrySearchAgent(ScAgentClassic):
                 elif alias == "_relation":
                     relation = self.get_element_for_reconstruction(element, "_relation")
                 elif alias == "_main_arc" or alias == "_main_edge":
-                    # Определяем тип основной дуги
                     print(f"asdhdfjgkjfdkd {alias}")
                     original_arc_type = self.get_element_type(element)
                     if original_arc_type == sc_type.CONST_COMMON_EDGE:
@@ -579,13 +550,12 @@ class GeometrySearchAgent(ScAgentClassic):
                     else:
                         main_arc_type = sc_type.VAR_COMMON_ARC
             
-            # Если нашли все необходимые элементы, восстанавливаем пятёрку с ПЕРЕМЕННЫМИ дугами
             if source and target and relation:
                 template.quintuple(
                     source,
-                    main_arc_type >> "_var_main_arc",  # ПЕРЕМЕННАЯ основная дуга
+                    main_arc_type >> "_var_main_arc",  
                     target,
-                    sc_type.VAR_PERM_POS_ARC >> "_var_rel_arc",   # ПЕРЕМЕННАЯ дуга отношения
+                    sc_type.VAR_PERM_POS_ARC >> "_var_rel_arc",   
                     relation
                 )
                 
@@ -597,11 +567,9 @@ class GeometrySearchAgent(ScAgentClassic):
         try:
             element_idtf = get_element_system_identifier(element)
             
-            # Если нода безымянная, используем переменную ноду
             if not element_idtf or element_idtf.startswith("unknown_") or element_idtf.startswith("element_"):
                 element_type = self.get_element_type(element)
                 
-                # Создаем переменную ноду соответствующего типа
                 if element_type.is_node():
                     if element_type.is_const():
                         if element_type == sc_type.CONST_NODE_CLASS:
@@ -614,7 +582,6 @@ class GeometrySearchAgent(ScAgentClassic):
                 else:
                     return sc_type.VAR_NODE >> f"_var_node_{alias}"
             else:
-                # Для именованных нод используем конкретный элемент
                 return element
                 
         except Exception as e:
@@ -636,7 +603,6 @@ class GeometrySearchAgent(ScAgentClassic):
             
         except Exception as e:
             logging.error(f"Error creating result structure: {str(e)}")
-            # В случае ошибки возвращаем пустую структуру
             return generate_node(sc_type.CONST_NODE_STRUCTURE)
 
     def find_const_nodes_for_structure(self, structure_addr: ScAddr) -> list:
@@ -646,15 +612,14 @@ class GeometrySearchAgent(ScAgentClassic):
         try:
             template = ScTemplate()
             
-            # Используем пятёрку: CONST_NODE --arc--> STRUCT, связанная через nrel_context_of_the_action
             nrel_context = ScKeynodes.resolve("nrel_context_of_the_action", sc_type.CONST_NODE_NON_ROLE)
             
             template.quintuple(
-                sc_type.VAR_NODE >> "_const_node",           # source
-                sc_type.VAR_COMMON_ARC >> "_arc",            # connector  
-                structure_addr,                              # target (конкретная структура)
-                sc_type.VAR_PERM_POS_ARC >> "_context_arc",  # attribute_connector
-                nrel_context                                 # attribute
+                sc_type.VAR_NODE >> "_const_node",          
+                sc_type.VAR_COMMON_ARC >> "_arc",              
+                structure_addr,                              
+                sc_type.VAR_PERM_POS_ARC >> "_context_arc",  
+                nrel_context                                 
             )
             
             search_results = search_by_template(template)

@@ -3,18 +3,15 @@ from .edge import Point, Edge
 
 class Polygon:
     def __init__(self, vertices: Optional[List[Point]] = None, edges: Optional[List[Edge]] = None, name: Optional[str] = None):
-        # Если vertices не предоставлены, создаем пустой список
         if vertices is None:
             vertices = []
             
-        # Если edges не предоставлены, создаем пустой список
         if edges is None:
             edges = []
         
         self.name = name
         self.vertices = vertices
         self.edges = edges
-        # Определяем тип по количеству вершин или ребер
         vertex_count = len(vertices)
         if vertex_count >= 3:
             self.type = f"polygon_{vertex_count}"

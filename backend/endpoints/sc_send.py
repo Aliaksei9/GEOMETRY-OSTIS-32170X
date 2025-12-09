@@ -15,8 +15,6 @@ class SCAdapter:
         self._connected = False
         self.parsedSolvingSteps = None
 
-
-    # --- Подключение и отключение ---
     def connect(self):
         if not self._connected:
             connect(self.url)

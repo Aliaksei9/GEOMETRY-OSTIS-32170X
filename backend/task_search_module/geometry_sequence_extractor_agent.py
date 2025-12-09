@@ -120,17 +120,15 @@ class GeometrySequenceExtractorAgent(ScAgentClassic):
     def find_tuple_node_for_task(self, task_node: ScAddr) -> ScAddr:
         """Ищет ноду CONST_NODE_TUPLE через отношение nrel_decomposition_of_action"""
         try:
-            # Разрешаем идентификатор отношения
             nrel_decomposition = ScKeynodes.resolve("nrel_decomposition_of_action", sc_type.CONST_NODE_NON_ROLE)
             
-            # Создаем шаблон для поиска: task_node -> tuple_node через nrel_decomposition_of_action
             template = ScTemplate()
             template.quintuple(
-                task_node,                              # source (задача)
-                sc_type.VAR_ARC >> "_main_arc",        # connector
-                sc_type.VAR_NODE_TUPLE >> "_tuple_node", # target (кортеж)
-                sc_type.VAR_PERM_POS_ARC >> "_rel_arc", # attribute_connector
-                nrel_decomposition                      # attribute
+                task_node,                              
+                sc_type.VAR_ARC >> "_main_arc",        
+                sc_type.VAR_NODE_TUPLE >> "_tuple_node", 
+                sc_type.VAR_PERM_POS_ARC >> "_rel_arc", 
+                nrel_decomposition                      
             )
             
             search_results = search_by_template(template)
@@ -155,14 +153,13 @@ class GeometrySequenceExtractorAgent(ScAgentClassic):
             # Получаем rrel ноду по индексу
             rrel_node = ScKeynodes.rrel_index(rrel_index)
             
-            # Ищем целевую ноду через роль отношение
             template = ScTemplate()
             template.quintuple(
-                source_node,                            # source
-                sc_type.VAR_ARC >> "_main_arc",        # connector
-                sc_type.VAR_NODE >> "_target_node",    # target
-                sc_type.VAR_PERM_POS_ARC >> "_rel_arc", # attribute_connector
-                rrel_node                              # attribute (rrel_1, rrel_2, etc.)
+                source_node,                           
+                sc_type.VAR_ARC >> "_main_arc",        
+                sc_type.VAR_NODE >> "_target_node",    
+                sc_type.VAR_PERM_POS_ARC >> "_rel_arc", 
+                rrel_node                             
             )
             
             search_results = search_by_template(template)
@@ -189,7 +186,6 @@ class GeometrySequenceExtractorAgent(ScAgentClassic):
         current_node = start_node
         
         try:
-            # Разрешаем идентификатор отношения
             nrel_basic_sequence = ScKeynodes.resolve("nrel_basic_sequence", sc_type.CONST_NODE_NON_ROLE)
             
             while current_node:
@@ -227,11 +223,11 @@ class GeometrySequenceExtractorAgent(ScAgentClassic):
         try:
             template = ScTemplate()
             template.quintuple(
-                current_node,                           # source (текущая нода)
-                sc_type.VAR_ARC >> "_main_arc",        # connector
-                sc_type.VAR_NODE >> "_next_node",      # target (следующая нода)
-                sc_type.VAR_PERM_POS_ARC >> "_rel_arc", # attribute_connector
-                nrel_sequence                          # attribute (nrel_basic_sequence)
+                current_node,                           
+                sc_type.VAR_ARC >> "_main_arc",        
+                sc_type.VAR_NODE >> "_next_node",      
+                sc_type.VAR_PERM_POS_ARC >> "_rel_arc",
+                nrel_sequence                          
             )
             
             search_results = search_by_template(template)
@@ -278,5 +274,4 @@ class GeometrySequenceExtractorAgent(ScAgentClassic):
             
         except Exception as e:
             logging.error(f"Error creating result structure: {str(e)}")
-            # В случае ошибки возвращаем пустую структуру
             return generate_node(sc_type.CONST_NODE_STRUCTURE)
