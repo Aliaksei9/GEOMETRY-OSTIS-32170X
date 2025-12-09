@@ -1,0 +1,129 @@
+{
+  "name": "complex_geometry_demo",
+  "figures": [
+    {
+      "type": "triangle",
+      "name": "main_triangle",
+      "vertices": ["A", "B", "C"],
+      "edges": [
+        {
+          "vert1": "A",
+          "vert2": "B",
+          "length": {
+            "way_of_measurement": "centimeters",
+            "value": 5.5
+          }
+        },
+        {
+          "vert1": "B", 
+          "vert2": "C",
+          "length": {
+            "way_of_measurement": "centimeters",
+            "value": 4.2
+          }
+        },
+        {
+          "vert1": "C",
+          "vert2": "A",
+          "length": {
+            "way_of_measurement": "centimeters",
+            "value": 3.8
+          }
+        }
+      ]
+    },
+    {
+      "type": "quadrilateral", 
+      "name": "test_square",
+      "vertices": ["D", "E", "F", "G"],
+      "edges": [
+        {
+          "vert1": "D",
+          "vert2": "E",
+          "length": {
+            "way_of_measurement": "centimeters",
+            "value": 2.0
+          }
+        },
+        {
+          "vert1": "E",
+          "vert2": "F",
+          "length": {
+            "way_of_measurement": "centimeters",
+            "value": 2.0
+          }
+        },
+        {
+          "vert1": "F",
+          "vert2": "G",
+          "length": {
+            "way_of_measurement": "centimeters",
+            "value": 2.0
+          }
+        },
+        {
+          "vert1": "G",
+          "vert2": "D",
+          "length": {
+            "way_of_measurement": "centimeters", 
+            "value": 2.0
+          }
+        }
+      ]
+    },
+    {
+      "type": "circle",
+      "name": "inscribed_circle",
+      "center": "O",
+      "diameter": {
+        "vert1": "W",
+        "vert2": "Q",
+        "length": {
+          "way_of_measurement": "centimeters", 
+          "value": 2.0
+        }
+      }
+    },
+    {
+      "construction_elements": [
+        {
+          "type": "general_point",
+          "name": "X"
+        },
+        {
+          "type": "general_point",
+          "name": "Y" 
+        },
+        {
+          "type": "line",
+          "vert1": "X",
+          "vert2": "Y"
+        },
+        {
+          "type" : "angle",
+          "vert1": "W",
+          "vert3": "Z",
+          "vert2": "Q",
+          "angle": {
+            "way_of_measurement": "degrees", 
+            "value": 90.0
+          }
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "nonrole",
+      "name": "contains",
+      "source_entity": "main_triangle",
+      "target_entity": "inscribed_circle"
+    },
+    {
+      "type": "role",
+      "name": "boundary_point",
+      "source_entity": "AB",
+      "target_entity": "A"
+    }
+  ]
+}

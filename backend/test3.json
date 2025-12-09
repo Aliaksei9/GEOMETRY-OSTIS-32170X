@@ -1,0 +1,75 @@
+{
+  "name": "circle_and_quadrilateral",
+  "figures": [
+    {
+      "type": "circle",
+      "name": "T"
+    },
+    {
+      "type": "quadrilateral", 
+      "name": "ABCD",
+      "edges": [
+        {
+          "vert1": "A",
+          "vert2": "B"
+        },
+        {
+          "vert1": "B",
+          "vert2": "C"
+        },
+        {
+          "vert1": "C", 
+          "vert2": "D"
+        },
+        {   
+          "vert1": "D",
+          "vert2": "A"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "type": "nonrole",
+      "name": "center_of_circle",
+      "target_entity": "O",
+      "source_entity": "T",
+      "oriented": true
+    },
+    {
+      "type": "nonrole",
+      "name": "radius",
+      "target_entity": "MN",
+      "source_entity": "T",
+      "oriented": true
+    },
+    {
+      "type": "nonrole",
+      "name": "chord",
+      "target_entity": "AB",
+      "source_entity": "T",
+      "oriented": true
+    },
+    {
+      "type": "nonrole",
+      "name": "chord",
+      "target_entity": "CD",
+      "source_entity": "T",
+      "oriented": true
+    },
+    {
+      "type": "nonrole",
+      "name": "chord",
+      "target_entity": "BC",
+      "source_entity": "T",
+      "oriented": true
+    },
+    {
+      "type": "nonrole",
+      "name": "chord",
+      "target_entity": "AD",
+      "source_entity": "T",
+      "oriented": true
+    }
+  ]
+}
