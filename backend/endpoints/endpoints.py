@@ -60,13 +60,15 @@ async def upload_construction(construction_input: ComplexConstructionInput):
         }
         
         for obj in business_objects:
+            # В обработке полигонов изменим формирование edge_names
             if obj["type"] == "polygon":
                 polygon = obj["object"]
-                edge_names = [f"{e.vert1.name}{e.vert2.name}" for e in polygon.edges]
+                # Теперь edge.vert1 и edge.vert2 - это строки, а не объекты Point
+                edge_names = [f"{edge.vert1}{edge.vert2}" for edge in polygon.edges]
                 result["figures"].append({
                     "type": obj["subtype"],
                     "name": obj["name"],
-                    "vertices": [v.name for v in polygon.vertices],
+                    "vertices": [v.name for v in polygon.vertices],  # Только явно созданные точки
                     "edges": edge_names,
                     "vertex_count": len(polygon.vertices),
                     "input_data": obj["input_data"]
@@ -117,7 +119,8 @@ async def upload_construction(construction_input: ComplexConstructionInput):
                 "type": relationship.type,
                 "name": relationship.name,
                 "source_entity": relationship.source_entity,
-                "target_entity": relationship.target_entity
+                "target_entity": relationship.target_entity,
+                "oriented": relationship.oriented  # Добавляем ориентацию
             })
         
         parsing_result = ""

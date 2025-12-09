@@ -15,15 +15,16 @@ class GeometryFactory:
 
     @staticmethod
     def create_edge(edge_input: EdgeInput, point_registry: Dict[str, Point]) -> Edge:
-        vert1 = GeometryFactory.create_point(edge_input.vert1, point_registry)  # vert1 - строка
-        vert2 = GeometryFactory.create_point(edge_input.vert2, point_registry)  # vert2 - строка
+        # Используем строки напрямую, не создавая точки
+        vert1_str = edge_input.vert1
+        vert2_str = edge_input.vert2
         
-        if vert1.name == vert2.name:
-            raise ValueError(f"Edge vertices cannot be the same: {vert1.name}")
+        if vert1_str == vert2_str:
+            raise ValueError(f"Edge vertices cannot be the same: {vert1_str}")
         
         length_value = edge_input.length.value if edge_input.length else None
         
-        return Edge(vert1=vert1, vert2=vert2, length=length_value)
+        return Edge(vert1=vert1_str, vert2=vert2_str, length=length_value)
 
     @staticmethod
     def create_angle(angle_input, point_registry: Dict[str, Point]) -> Angle:
@@ -45,33 +46,36 @@ class GeometryFactory:
 
     @staticmethod
     def create_polygon(polygon_input: PolygonInput, point_registry: Dict[str, Point]) -> Polygon:
-        # Создаем vertices если они предоставлены, иначе создаем пустой список
+        # Создаем vertices если они предоставлены
         if polygon_input.vertices:
             vertices = [GeometryFactory.create_point(v, point_registry) for v in polygon_input.vertices]
         else:
             vertices = []
         
-        # Создаем edges если они предоставлены, иначе создаем пустой список
+        # Создаем edges (теперь они работают со строками)
         if polygon_input.edges:
             edges = [GeometryFactory.create_edge(edge, point_registry) for edge in polygon_input.edges]
         else:
             edges = []
         
-        # УБРАНО: автоматическое создание точек по умолчанию
-        # Если нет вершин и нет edges - оставляем пустые списки
-        
         return Polygon(vertices=vertices, edges=edges, name=polygon_input.name)
 
     @staticmethod
     def create_circle(circle_input: CircleInput, point_registry: Dict[str, Point]) -> Circle:
-        center = GeometryFactory.create_point(circle_input.center, point_registry)
+        # Проверяем, что центр существует в реестре
+        if circle_input.center not in point_registry:
+            raise ValueError(f"Center point '{circle_input.center}' not found. Points must be declared in vertices or construction_elements first.")
+        
+        center = point_registry[circle_input.center]
         
         diameter_value = None
         
         if circle_input.diameter:
-            # Создаем точки диаметра
-            GeometryFactory.create_point(circle_input.diameter.vert1, point_registry)
-            GeometryFactory.create_point(circle_input.diameter.vert2, point_registry)
+            # Проверяем точки диаметра
+            if circle_input.diameter.vert1 not in point_registry:
+                raise ValueError(f"Diameter point '{circle_input.diameter.vert1}' not found.")
+            if circle_input.diameter.vert2 not in point_registry:
+                raise ValueError(f"Diameter point '{circle_input.diameter.vert2}' not found.")
             
             # Получаем значение диаметра
             if circle_input.diameter.length and circle_input.diameter.length.value is not None:
@@ -109,7 +113,8 @@ class GeometryFactory:
             rel_type=relationship_input.type,
             name=relationship_input.name,
             source_entity=source_entity,
-            target_entity=target_entity
+            target_entity=target_entity,
+            oriented=relationship_input.oriented  # Передаем ориентацию
         )
 
     @staticmethod

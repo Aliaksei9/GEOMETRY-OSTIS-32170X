@@ -57,21 +57,18 @@ class SCAdapter:
                 "action_search_geometry_constructions", 
                 construction_structure
             )
-            
             if first_agent_result:
                 # Запускаем второго агента с результатом первого
                 second_agent_result = self._start_agent(
                     "action_extract_geometry_sequence",
                     first_agent_result
                 )
-                
                 if second_agent_result:
                     # Запускаем третьего агента с результатом второго
                     third_agent_result = self._start_agent(
                         "action_parse_geometry_sequence",
                         second_agent_result
                     )
-                    
                     if third_agent_result:
                         # Находим scLink и сохраняем его содержимое
                         self._find_and_save_link_content(third_agent_result)
@@ -140,7 +137,7 @@ class SCAdapter:
         from sc_client.client import search_by_template
         from sc_client.models import ScTemplate
         
-        max_wait_time = 300  # секунд
+        max_wait_time = 400  # секунд
         check_interval = 0.5  # секунд
         waited_time = 0
         
@@ -535,7 +532,7 @@ class SCAdapter:
         """Создаёт структуру полигона"""
         addrs = []
         
-        # Обработка вершин (если они есть)
+        # Обработка вершин (если они есть) - только явно объявленные точки
         vertices = polygon_data.get("vertices", [])
         for vertex_name in vertices:
             vertex_node = ScKeynodes.resolve(vertex_name, sc_type.CONST_NODE)
@@ -543,17 +540,17 @@ class SCAdapter:
             angle_arc_addrs = self.generate_non_role_relation(polygon_node, vertex_node, nrel_angle)
             addrs.extend([vertex_node, nrel_angle] + angle_arc_addrs)
 
-        # Обработка сторон (если они есть)
+        # Обработка сторон - создаем только отрезки, без точек
         input_data = polygon_data.get("input_data")
         if input_data and hasattr(input_data, 'edges') and input_data.edges:
             for edge_input in input_data.edges:
+                # Имя отрезка формируется из строк vert1 и vert2
                 edge_name = f"{edge_input.vert1}{edge_input.vert2}"
                 edge_node = ScKeynodes.resolve(edge_name, sc_type.CONST_NODE)
                 
                 nrel_side = ScKeynodes.resolve("nrel_side", sc_type.CONST_NODE_NON_ROLE)
                 side_arc_addrs = self.generate_non_role_relation(polygon_node, edge_node, nrel_side)
                 
-                # Убрано создание отношений nrel_endpoint
                 addrs.extend([edge_node, nrel_side] + side_arc_addrs)
                 
                 if edge_input.length:
@@ -567,20 +564,28 @@ class SCAdapter:
         addrs = []
         try:
             concept_length = ScKeynodes.resolve("concept_length", sc_type.CONST_NODE_SUPERCLASS)
-            decimal_numeral_system = ScKeynodes.resolve("decimal_numeral_system", sc_type.CONST_NODE_CLASS)
-            nrel_idtf = ScKeynodes.resolve("nrel_idtf", sc_type.CONST_NODE_NON_ROLE)
             class_number = ScKeynodes.resolve("number", sc_type.CONST_NODE_CLASS)
             nrel_measurement_str = str(length_info.get("way_of_measurement"))
             nrel_measurement = ScKeynodes.resolve(f"nrel_measurement_in_{nrel_measurement_str}", sc_type.CONST_NODE_NON_ROLE)
 
-            addrs.extend([concept_length, decimal_numeral_system, nrel_idtf, class_number, nrel_measurement])
+            addrs.extend([concept_length, class_number, nrel_measurement])
 
             length_value = length_info.get("value") if isinstance(length_info, dict) else length_info
             
             if length_value is None:
                 return addrs
-                
-            value_str = str(length_value).replace('.', '_')
+            
+            # Преобразуем значение в float для проверки на целочисленность
+            try:
+                float_value = float(length_value)
+                # Проверяем, является ли число целым
+                if float_value.is_integer():
+                    value_str = str(int(float_value))  # Убираем .0
+                else:
+                    value_str = str(float_value).replace('.', '_')  # Заменяем точку на подчеркивание
+            except (ValueError, TypeError):
+                # Если не удалось преобразовать в число, используем строку как есть
+                value_str = str(length_value).replace('.', '_')
             
             anonymous_length_node = generate_node(sc_type.CONST_NODE_CLASS)
             
@@ -592,17 +597,12 @@ class SCAdapter:
             measurement_arc_addrs = self.generate_non_role_relation(anonymous_length_node, number_node, nrel_measurement)
             number_class_arc_addr = generate_connector(sc_type.CONST_PERM_POS_ARC, class_number, number_node)
             
-            number_link = generate_link(str(length_value))
-            idtf_arc_addrs = self.generate_non_role_relation(number_node, number_link, nrel_idtf)
-            decimal_arc_addr = generate_connector(sc_type.CONST_PERM_POS_ARC, decimal_numeral_system, number_link)
-            
             addrs.extend([
                 anonymous_length_node, edge_arc_addr, length_arc_addr,
                 number_node, number_class_arc_addr,
-                number_link, decimal_arc_addr
-            ] + measurement_arc_addrs + idtf_arc_addrs)  # РАСКРЫВАЕМ списки
+            ] + measurement_arc_addrs)  # РАСКРЫВАЕМ списки
             
-            print(f"Created length structure for value: {length_value}")
+            print(f"Created length structure for value: {length_value} (node: number_{value_str})")
             
         except Exception as e:
             print(f"Error creating length structure: {e}")
@@ -615,11 +615,12 @@ class SCAdapter:
         for i, relationship in enumerate(relationships):
             rel_type = relationship.get("type", "role")
             rel_name = relationship.get("name", f"relationship_{i}")
+            oriented = relationship.get("oriented", True)  # Получаем ориентацию
 
             source_entity_name = relationship.get("source_entity")
             target_entity_name = relationship.get("target_entity")
             
-            print(f'Creating relationship: {source_entity_name} -> {target_entity_name} (type: {rel_type}, name: {rel_name})')
+            print(f'Creating relationship: {source_entity_name} -> {target_entity_name} (type: {rel_type}, name: {rel_name}, oriented: {oriented})')
 
             source_node = ScKeynodes.resolve(str(source_entity_name), sc_type.CONST_NODE)
             target_node = ScKeynodes.resolve(str(target_entity_name), sc_type.CONST_NODE)
@@ -627,13 +628,20 @@ class SCAdapter:
 
             if rel_type == "nonrole":
                 nrel_relation = ScKeynodes.resolve(f"nrel_{rel_name}", sc_type.CONST_NODE_NON_ROLE)
-                relation_arc_addrs = self.generate_non_role_relation(source_node, target_node, nrel_relation)
-                addrs.extend([nrel_relation] + relation_arc_addrs)  # РАСКРЫВАЕМ список
-                print(f"Created non-role relation: nrel_{rel_name}")
+                
+                # ВЫБИРАЕМ ТИП ДУГИ В ЗАВИСИМОСТИ ОТ ОРИЕНТАЦИИ
+                if oriented:
+                    connector_type = sc_type.CONST_COMMON_ARC  # Ориентированная дуга
+                else:
+                    connector_type = sc_type.CONST_COMMON_EDGE  # Неориентированное ребро
+                    
+                relation_arc_addrs = self.generate_binary_relation(connector_type, source_node, target_node, nrel_relation)
+                addrs.extend([nrel_relation] + relation_arc_addrs)
+                print(f"Created non-role relation: nrel_{rel_name} (oriented: {oriented})")
             else:
                 rrel_relation = ScKeynodes.resolve(f"rrel_{rel_name}", sc_type.CONST_NODE_ROLE)
                 relation_arc_addrs = self.generate_role_relation(source_node, target_node, rrel_relation)
-                addrs.extend([rrel_relation] + relation_arc_addrs)  # РАСКРЫВАЕМ список
+                addrs.extend([rrel_relation] + relation_arc_addrs)
                 print(f"Created role relation: rrel_{rel_name}")
 
         return addrs
