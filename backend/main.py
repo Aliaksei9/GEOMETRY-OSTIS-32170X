@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from endpoints.endpoints import upload_construction
+from services.endpoints import upload_construction
 from contextlib import asynccontextmanager
 import subprocess
 import sys

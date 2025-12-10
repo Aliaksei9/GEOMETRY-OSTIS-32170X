@@ -14,7 +14,7 @@ from sc_client.models import ScAddr, ScLinkContent, ScLinkContentType
 from sc_client.constants import sc_type
 from sc_kpm import ScKeynodes
 from sc_kpm.utils import generate_link, generate_connector, generate_node
-from endpoints.sc_send import SCAdapter
+from services.sc_adapter import SCAdapter
 from contextlib import asynccontextmanager
 
 # Глобальные переменные для управления процессом
