@@ -76,8 +76,3 @@ app.post("/upload-construction/",
 @app.get("/", tags=["validation"])
 async def root():
     return {"message": "Geometry Construction API", "status": "active"}
-
-@app.get("/health", tags=["validation"])
-async def health_check():
-    """Проверка здоровья API"""
-    return {"status": "healthy", "service": "geometry-api"}
