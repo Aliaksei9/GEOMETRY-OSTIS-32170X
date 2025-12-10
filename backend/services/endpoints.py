@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from dto.input_dtos import ComplexConstructionInput, PolygonInput, CircleInput, ConstructionElementsContainerInput, RelationshipInput
 from factory.factory import GeometryFactory
-from .sc_send import SCAdapter
+from .sc_adapter import SCAdapter
 import json
 
 async def upload_construction(construction_input: ComplexConstructionInput):

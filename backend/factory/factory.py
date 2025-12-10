@@ -1,5 +1,6 @@
 from typing import Dict, Union, Any
-from entities.edge import Point, Edge
+from entities.point import Point
+from entities.edge import Edge
 from entities.polygon import Polygon
 from entities.circle import Circle
 from entities.angle import Angle

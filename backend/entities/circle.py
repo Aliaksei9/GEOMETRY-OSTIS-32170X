@@ -1,4 +1,4 @@
-from .edge import Point
+from .point import Point
 import math
 from typing import Optional
 

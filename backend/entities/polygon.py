@@ -1,5 +1,7 @@
 from typing import List, Optional
-from .edge import Point, Edge
+
+from .point import Point
+from .edge import Edge
 
 class Polygon:
     def __init__(self, vertices: Optional[List[Point]] = None, edges: Optional[List[Edge]] = None, name: Optional[str] = None):

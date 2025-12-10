@@ -1,11 +1,12 @@
-from .edge import Point, Edge
+from .point import Point
+from .edge import Edge
 from .polygon import Polygon
 from .circle import Circle
 from .relationship import Relationship
 from .angle import Angle
 
 __all__ = [
-    "Point", 
+    "point", 
     "Edge", 
     "Polygon",
     "Circle",

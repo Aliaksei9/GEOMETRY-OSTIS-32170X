@@ -1,4 +1,4 @@
-from .edge import Point
+from .point import Point
 from typing import Optional
 from dto.input_dtos import AngleInput
 

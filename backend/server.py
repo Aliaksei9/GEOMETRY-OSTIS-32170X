@@ -9,7 +9,6 @@ from sc_kpm import ScServer
 from sc_client.models import ScAddr
 from sc_kpm.utils import get_element_system_identifier
 from task_search_module.geometry_search_module import GeometrySearchModule
-from geometry_parser_module import GeometryParserModule
 
 SC_SERVER_PROTOCOL = "protocol"
 SC_SERVER_HOST = "host"
@@ -26,8 +25,7 @@ def main(args: dict):
 
     with server.connect():
         modules = [
-            GeometrySearchModule(),
-            GeometryParserModule()
+            GeometrySearchModule()
         ]
         server.add_modules(*modules)
         with server.register_modules():
