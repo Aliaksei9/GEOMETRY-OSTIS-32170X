@@ -7,6 +7,7 @@ from sc_kpm.identifiers import ScAlias
 from sc_kpm import ScKeynodes
 from sc_kpm.utils import generate_connector, generate_link, generate_node
 from typing import Dict, List, Any
+from .agent_chain_executor import AgentChainExecutor
 
 class SCAdapter:
 
@@ -86,6 +87,10 @@ class SCAdapter:
 
             self._connect_all_to_main_node(main_node, all_addrs)
             print("Successfully uploaded construction to SC-memory.")
+
+            print("Запуск цепочки агентов...")
+            chainExecutor = AgentChainExecutor() 
+            self.parsedSolvingSteps = chainExecutor._execute_agent_chain(main_node)
 
             return True, all_addrs
 
